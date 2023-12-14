@@ -6,7 +6,7 @@
 /*   By: grebrune <grebrune@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 15:12:08 by grebrune          #+#    #+#             */
-/*   Updated: 2023/12/14 20:59:32 by grebrune         ###   ########.fr       */
+/*   Updated: 2023/12/14 21:07:40 by grebrune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,10 +73,10 @@ void	ft_lstclear(t_list **lst, void (*del)(void *));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 
+size_t	ft_ctofindinstr(char *str, char c);
 char	*get_next_line(int fd);
 char	*ft_strcut(char *str);
 char	*ft_strnext_line(char *str);
-size_t	ft_charcmp(char *str, char c);
 char	*ft_lastline(char *str);
 char	*ft_freenjoin(char *s1, char *s2);
 #endif

@@ -6,13 +6,13 @@
 /*   By: grebrune <grebrune@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 14:42:32 by grebrune          #+#    #+#             */
-/*   Updated: 2023/12/14 20:59:32 by grebrune         ###   ########.fr       */
+/*   Updated: 2023/12/14 21:36:03 by grebrune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_charcmp(char *str, char c)
+size_t	ft_ctofindinstr(char *str, char c)
 {
 	size_t	i;
 
@@ -38,7 +38,7 @@ char	*read_line(int fd, char *line, char **next_line)
 	i = 1;
 	while (i > 0)
 	{
-		if (ft_charcmp(line, '\n'))
+		if (ft_ctofindinstr(line, '\n'))
 			return (*next_line = ft_strnext_line(line), ft_strcut(line));
 		i = read(fd, buff, BUFFER_SIZE);
 		if (i <= 0 && (!line))
@@ -62,30 +62,4 @@ char	*get_next_line(int fd)
 	if (read(fd, NULL, 0) < 0)
 		return (free(line), next_line = NULL);
 	return (read_line(fd, line, &next_line));
-}
-
-int	main(void)
-{
-	int		fd;
-	char	*line;
-	t_list	*lst;
-	t_list	*head;
-
-	fd = open("map.ber", O_RDONLY);
-	if (fd == -1)
-		return (ft_putstr_fd("Error : Can't open file.", 1), 0);
-	line = get_next_line(fd);
-	lst = ft_lstnew((void *)line);
-	while (line)
-	{
-		if (line)
-			free(line);
-		line = get_next_line(fd);
-		lst = ft_lstnew((void *)line);
-		ft_lstadd_back(&head, lst);
-		lst = lst->next;
-	}
-	lst->next = NULL;
-	close(fd);
-	return (0);
 }
