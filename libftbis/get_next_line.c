@@ -6,11 +6,11 @@
 /*   By: grebrune <grebrune@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 14:42:32 by grebrune          #+#    #+#             */
-/*   Updated: 2023/11/21 18:14:52 by grebrune         ###   ########.fr       */
+/*   Updated: 2023/12/14 20:59:32 by grebrune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "libft.h"
 
 size_t	ft_charcmp(char *str, char c)
 {
@@ -68,25 +68,24 @@ int	main(void)
 {
 	int		fd;
 	char	*line;
-    t_lst   *lst;
-    t_lst   *head;
+	t_list	*lst;
+	t_list	*head;
 
-	i = 0;
 	fd = open("map.ber", O_RDONLY);
 	if (fd == -1)
-		return (ft_putstr("Error : Can't open file."));
+		return (ft_putstr_fd("Error : Can't open file.", 1), 0);
 	line = get_next_line(fd);
-    lst = lstnew((void *)line);
+	lst = ft_lstnew((void *)line);
 	while (line)
 	{
 		if (line)
 			free(line);
 		line = get_next_line(fd);
-        lst = lstnew((void *)line);
-        ft_lstadd_back(&head, new);
-        lst = lst->next;
+		lst = ft_lstnew((void *)line);
+		ft_lstadd_back(&head, lst);
+		lst = lst->next;
 	}
-    lst->next = NULL;
+	lst->next = NULL;
 	close(fd);
 	return (0);
 }
