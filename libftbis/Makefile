@@ -47,8 +47,6 @@ SRCS		:=	\
 				ft_toupper.c\
 				get_next_line.c\
 				get_next_line_utils.c\
-
-SRC_B		:=	\
 				ft_lstnew.c\
 				ft_lstadd_front.c\
 				ft_lstsize.c\
@@ -65,8 +63,6 @@ OBJS_D		:=	objs/
 
 OBJS		:=	$(SRCS:%.c=$(OBJS_D)%.o)
 
-OBJS_B		:=	$(SRC_B:%.c=$(OBJS_D)%.o)
-
 HEAD		:=	libft.h
 
 HEAD_D		:=	.
@@ -79,9 +75,6 @@ NAME		:=	libft.a
 
 all			:	$(NAME)
 
-bonus		:
-				@make SRCS="$(SRCS) $(SRC_B)"
-
 $(NAME)		:	$(OBJS_D) $(OBJS) Makefile
 				$(AR) $(CLFAGS) -o $(NAME) $(OBJS)
 
@@ -92,7 +85,7 @@ $(OBJS_D)	:
 				@mkdir -p $(OBJS_D)
 
 clean		:
-				$(RM) -r $(OBJS) $(OBJS_D) $(OBJS_B)
+				$(RM) -r $(OBJS) $(OBJS_D)
 
 fclean		:	clean
 				$(RM) $(NAME)
