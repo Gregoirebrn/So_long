@@ -6,7 +6,7 @@
 /*   By: grebrune <grebrune@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 19:58:30 by grebrune          #+#    #+#             */
-/*   Updated: 2023/12/15 20:08:15 by grebrune         ###   ########.fr       */
+/*   Updated: 2023/12/15 21:13:37 by grebrune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ int    check_border(char **tab)
             return (1);
         x++;
     }
+    if (x == y)
+        return (1);
     return (0);
 }
 
@@ -61,6 +63,32 @@ int check_val(char **tab)
         x++;
     }
     if (val.p_val != 1 || val.e_val != 1 || val.c_val < 1)
+        return (1);
+    return (0);
+}
+
+int     check_path(char **tab)
+{
+    size_t  y;
+    size_t  x;
+    size_t  p_y;
+    size_t  p_x;
+    size_t  c;
+
+    x = 0;
+    while (tab[x])
+    {
+        y = 0;
+        while (tab[y])
+        {
+            if (tab[x][y] == 'P')
+                if (1 == find_path(tab, y, x))
+                    return (1);
+            y++;
+        }
+        x++;
+    }
+    if (still_c(tab) == 1)
         return (1);
     return (0);
 }
