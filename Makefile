@@ -32,7 +32,7 @@ $(NAME)		:	$(OBJS_D) $(OBJS) libft mlx Makefile
 				$(CC) $(OBJS) -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o $(NAME)
 
 $(OBJS)		:	$(OBJS_D)%.o: $(SRCS_D)%.c $(HEAD)
-				$(CC) $(CFLAGS) -I/usr/include -Imlx_linux -Ilibftbis -O3 -c $< -o $@
+				$(CC) $(CFLAGS) -I/usr/include -Imlx_linux -Ilibftbis -c $< -o $@
 
 $(OBJS_D)	:
 				@mkdir -p $(OBJS_D)
