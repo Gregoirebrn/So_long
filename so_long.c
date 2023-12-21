@@ -6,7 +6,7 @@
 /*   By: grebrune <grebrune@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 16:23:49 by grebrune          #+#    #+#             */
-/*   Updated: 2023/12/21 16:25:34 by grebrune         ###   ########.fr       */
+/*   Updated: 2023/12/21 16:34:03 by grebrune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,4 +30,5 @@ int	main(void)
 	mlx = mlx_init();
 	img.img = mlx_new_window(mlx, 1920, 1080, "so_long");
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
+
 }
