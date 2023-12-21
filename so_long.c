@@ -6,11 +6,11 @@
 /*   By: grebrune <grebrune@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 16:23:49 by grebrune          #+#    #+#             */
-/*   Updated: 2023/12/21 16:34:03 by grebrune         ###   ########.fr       */
+/*   Updated: 2023/12/21 17:19:59 by grebrune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minilibx-linux/mlx.h"
+#include "mlx_linux/mlx.h"
 
 typedef struct s_data {
 	void	*img;
@@ -20,15 +20,32 @@ typedef struct s_data {
 	int		endian;
 }				t_data;
 
+void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
+{
+	char	*dst;
+
+	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
+	*(unsigned int *)dst = color;
+}
 
 int	main(void)
 {
 	void	*mlx;
 	void	*mlx_win;
 	t_data	img;
+	int		i;
 
 	mlx = mlx_init();
-	img.img = mlx_new_window(mlx, 1920, 1080, "so_long");
-	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
+	mlx_win = mlx_new_window(mlx, 1920, 1080, "So_long");
+	img.img = mlx_new_image(mlx, 1920, 1080);
+	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, \
+	&img.endian);
+	for (i = 0; i < 50; i++)
+	{
+		my_mlx_pixel_put(&img, i, 5, 0x00FF0000);
+
+	}
+	mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
+	mlx_loop(mlx);
 
 }

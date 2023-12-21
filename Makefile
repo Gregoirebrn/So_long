@@ -38,7 +38,7 @@ $(OBJS_D)	:
 				@mkdir -p $(OBJS_D)
 
 mlx			:
-				make -C minilibx-linux
+				make -C mlx_linux
 
 libft		:
 				make -C libftbis
