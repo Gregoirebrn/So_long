@@ -38,7 +38,7 @@ $(OBJS_D)	:
 				@mkdir -p $(OBJS_D)
 
 mlx			:
-				make -C mlx_linux
+				make -C minilibx-linux
 
 clean		:
 				$(RM) -r $(OBJS) $(OBJS_D) $(OBJS_B)
