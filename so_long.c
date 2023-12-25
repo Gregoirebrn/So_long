@@ -6,7 +6,7 @@
 /*   By: grebrune <grebrune@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 16:23:49 by grebrune          #+#    #+#             */
-/*   Updated: 2023/12/25 18:43:41 by grebrune         ###   ########.fr       */
+/*   Updated: 2023/12/25 18:49:01 by grebrune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,8 @@ char    **map_maker(void)
         return (NULL);
     return (close(fd), ft_putstr_fd("Good!\n", 1), tab);
 }
-
+// have to close win with cross
+// print map in win with put_sprite
 int	main(void)
 {
     char **tab;
