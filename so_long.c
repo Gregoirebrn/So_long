@@ -6,7 +6,7 @@
 /*   By: grebrune <grebrune@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 16:23:49 by grebrune          #+#    #+#             */
-/*   Updated: 2024/01/03 16:01:52 by grebrune         ###   ########.fr       */
+/*   Updated: 2024/01/03 16:15:05 by grebrune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,12 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 
 void	put_sprite(void *mlx, char **map)
 {
-	int     i;
-	int     x;
-	void    *img;
-	static const char *tab[4] = {"wall.png", "empty.png", "collect.png", "door.png"};
+	int	i;
+	int	x;
+	void	*img;
 	int		img_width;
 	int		img_height;
+	static const char	*tab[4] = {"wall.png", "empty.png", "collect.png", "door.png"};
 
 	x = 0;
 	while (map[x])
@@ -43,7 +43,7 @@ void	put_sprite(void *mlx, char **map)
 		i = 0;
 		while (map[x][i])
 		{
-			img = mlx_xpm_file_to_image(mlx, tab[(map[x][i]) - 48], &img_width, &img_height);
+			img = mlx_xpm_file_to_image(mlx, "wall.png", &img_width, &img_height);
 			i++;
 		}
 		x++;
@@ -51,11 +51,11 @@ void	put_sprite(void *mlx, char **map)
 	my_mlx_pixel_put(img, img_width, img_height, 0x00FF0000);
 }
 
-char    **map_maker(void)
+char	**map_maker(void)
 {
 	int		fd;
 	char	line[1024];
-	char    **tab;
+	char	**tab;
 
 	fd = open("map.ber", O_RDONLY);
 	if (fd == -1)
