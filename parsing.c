@@ -6,7 +6,7 @@
 /*   By: grebrune <grebrune@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 19:58:30 by grebrune          #+#    #+#             */
-/*   Updated: 2024/01/03 16:02:08 by grebrune         ###   ########.fr       */
+/*   Updated: 2024/01/03 18:02:28 by grebrune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,25 +80,25 @@ int	still_c(char **tab)
 		{
 			if (tab[x][y] == 'C')
 				return (ft_putstr_fd("Error : All collectibles are not reachable.", 1), 1);
+			if (tab[x][y] == 'E')
+				return (ft_putstr_fd("Error : Map does not contain a valid path\n", 1), 1);
 			y++;
 		}
 		x++;
 	}
-	return (0);
+	return (ft_putstr_fd("Error : All collectibles are reachable.", 1), 0);
 }
 
-int	find_path(char **tab, size_t y, size_t x)
+void	find_path(char **tab, size_t x, size_t y)
 {
-	if (tab[x][y] == 'P')
-		return (0);
-	if (tab[x][y] != '1')
+	if (tab[x][y] != '1' && tab[x][y] != 'A')
 	{
-		find_path(tab, y - 1, x);
-		find_path(tab, y, x - 1);
-		find_path(tab, y + 1, x);
-		find_path(tab, y, x + 1);
+		tab[x][y] = 'A';
+		find_path(tab, x - 1, y);
+		find_path(tab, x + 1, y);
+		find_path(tab, x, y - 1);
+		find_path(tab, x, y + 1);
 	}
-	return (1);
 }
 
 size_t	tab_len(char **tab)
@@ -123,6 +123,7 @@ char	**tab_dup(char **tab)
 		tmp[x] = ft_strdup(tab[x]);
 		x++;
 	}
+	tmp[x] = NULL;
 	return (tmp);
 }
 
@@ -140,11 +141,10 @@ int	check_path(char **tab)
 		while (tab[y])
 		{
 			if (tab[x][y] == 'P')
-				if (1 == find_path(tmp, y, x))
-					return (ft_putstr_fd("Error : Map does not contain a valid path\n", 1), 1);
+				find_path(tmp, x, y);
 			y++;
 		}
 		x++;
 	}
-	return (still_c(tab));
+	return (still_c(tmp));
 }

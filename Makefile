@@ -6,11 +6,12 @@
 #    By: grebrune <grebrune@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/07 16:45:45 by grebrune          #+#    #+#              #
-#    Updated: 2023/12/22 19:28:18 by grebrune         ###   ########.fr        #
+#    Updated: 2024/01/03 16:56:14 by grebrune         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS		:= so_long.c
+SRCS		:= 	so_long.c\
+				parsing.c\
 
 SRCS_D		:=	#
 
@@ -31,7 +32,7 @@ NAME		:=	so_long
 all			:	$(NAME)
 
 $(NAME)		:	$(OBJS_D) $(OBJS) libft mlx Makefile
-				$(CC) $(OBJS) -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o $(NAME)
+				$(CC) $(OBJS) -Llibftbis -lft -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o $(NAME)
 
 $(OBJS)		:	$(OBJS_D)%.o: $(SRCS_D)%.c $(HEAD)
 				$(CC) $(CFLAGS) -I/usr/include -Imlx_linux -Ilibftbis -I$(HEAD_D) -c $< -o $@
