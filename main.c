@@ -16,15 +16,15 @@ int	main(void)
 {
 	int		fd;
 	char	line[1024];
-	char    **tab;
+	char	**tab;
 
 	fd = open("map.ber", O_RDONLY);
 	if (fd == -1)
 		return (ft_putstr_fd("Error : Can't open file.", 1), 0);
-	if ( 0 > read(fd ,line, 1024))
+	if (0 > read(fd ,line, 1024))
 		return (ft_putstr_fd("Error : Can't read file.", 1), 0);
-    tab = ft_split(line, '\n');
-    if (0 != check_border(tab) || check_val(tab) != 0 || check_path(tab) != 0)
+	tab = ft_split(line, '\n');
+	if (0 != check_border(tab) || check_val(tab) != 0 || check_path(tab) != 0)
 		return (1);
 	return (close(fd), ft_putstr_fd("Good!\n", 1), 0);
 }
