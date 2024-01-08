@@ -6,7 +6,7 @@
 /*   By: grebrune <grebrune@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 16:23:49 by grebrune          #+#    #+#             */
-/*   Updated: 2024/01/08 17:12:06 by grebrune         ###   ########.fr       */
+/*   Updated: 2024/01/08 18:28:37 by grebrune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,9 @@ int	main(void)
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, \
 	&img.endian);
 	put_sprite(vars.mlx, vars.win, tab);
-	mlx_hook(vars.win, 2, 1L<<0, ft_hook, &vars);
+	mlx_key_hook(vars.win, key_hook, vars.img);
 	mlx_hook(vars.win, 17, 1L<<0, close_win, &vars);
-	mlx_mouse_hook(vars.win, ft_hook, &vars);
+	mlx_mouse_hook(vars.win, key_hook, &vars);
 	mlx_loop(vars.mlx);
 	return (0);
 }

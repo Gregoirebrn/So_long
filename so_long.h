@@ -58,7 +58,7 @@ int		still_c(char **tab);
 size_t	tab_len(char **tab);
 
 int     close_win(t_vars *vars);
-int		ft_hook(int keycode, t_vars *vars);
+int		key_hook(int keycode, t_vars *vars);
 
 char	*find_val(char **map, int x, int i);
 void	put_sprite(void *mlx, void *win, char **tab);
