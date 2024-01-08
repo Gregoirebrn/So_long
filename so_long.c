@@ -6,7 +6,7 @@
 /*   By: grebrune <grebrune@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 16:23:49 by grebrune          #+#    #+#             */
-/*   Updated: 2023/12/25 18:49:01 by grebrune         ###   ########.fr       */
+/*   Updated: 2024/01/08 15:55:09 by grebrune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,11 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-void    put_sprite(void *mlx, char **map)
+void    put_sprite(void *mlx, void *win, char **map)
 {
     int     i;
     int     x;
     void    *img;
-    static const char *tab[4] = {"wall.png", "empty.png", "collect.png", "door.png"};
     int		img_width;
     int		img_height;
 
@@ -43,7 +42,15 @@ void    put_sprite(void *mlx, char **map)
         i = 0;
         while (map[x][i])
         {
-            img = mlx_xpm_file_to_image(mlx, tab[(map[x][i]) - 48], &img_width, &img_height);
+            if (map[x][i] == '0')
+                img = mlx_xpm_file_to_image(mlx, "empty.xpm", &img_width, &img_height);
+            if (map[x][i] == '1')
+                img = mlx_xpm_file_to_image(mlx, "empty.xpm", &img_width, &img_height);
+            if (map[x][i] == 'C')
+                img = mlx_xpm_file_to_image(mlx, "empty.xpm", &img_width, &img_height);
+            if (map[x][i] == 'P')
+                img = mlx_xpm_file_to_image(mlx, "empty.xpm", &img_width, &img_height);
+            mlx_put_image_to_window(mlx, win, img, i, x);
             i++;
         }
         x++;
@@ -83,7 +90,7 @@ int	main(void)
 	img.img = mlx_new_image(vars.mlx, 1920, 1080);
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, \
 	&img.endian);
-    put_sprite(vars.mlx, tab);
+    put_sprite(vars.mlx, vars.win, tab);
 	mlx_put_image_to_window(vars.mlx, vars.win, img.img, 0, 0);
     mlx_hook(vars.win, 2, 1L<<0, ft_hook, &vars);
     mlx_mouse_hook(vars.win, ft_hook, &vars);
