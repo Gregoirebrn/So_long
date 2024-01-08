@@ -6,18 +6,16 @@
 /*   By: grebrune <grebrune@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 16:23:49 by grebrune          #+#    #+#             */
-/*   Updated: 2024/01/08 15:45:05 by grebrune         ###   ########.fr       */
+/*   Updated: 2023/12/25 18:49:01 by grebrune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int ft_cross_kill_win()
-
 int	ft_hook(int keycode, t_vars *vars)
 {
     printf("%d\n", keycode);
-    if (keycode == 65307)
+    if (keycode == 65307 || keycode == 'a')
         mlx_destroy_window(vars->mlx, vars->win);
     return (0);
 }
@@ -35,7 +33,7 @@ void    put_sprite(void *mlx, char **map)
     int     i;
     int     x;
     void    *img;
-    static const char *tab[4] = {"wall.png", "empty.png", "collect.png", "door.png", "niki."};
+    static const char *tab[4] = {"wall.png", "empty.png", "collect.png", "door.png"};
     int		img_width;
     int		img_height;
 
@@ -45,11 +43,7 @@ void    put_sprite(void *mlx, char **map)
         i = 0;
         while (map[x][i])
         {
-            if (map[x][i] == 'C')
-                img = mlx_xpm_file_to_image(mlx, (char *)tab[2], &img_width, &img_height);
-            if (map[x][i] == 'P')
-                img = mlx_xpm_file_to_image(mlx, (char *)tab[4], &img_width, &img_height);
-            img = mlx_xpm_file_to_image(mlx, (char *)tab[(map[x][i]) - 48], &img_width, &img_height);
+            img = mlx_xpm_file_to_image(mlx, tab[(map[x][i]) - 48], &img_width, &img_height);
             i++;
         }
         x++;
@@ -91,7 +85,6 @@ int	main(void)
 	&img.endian);
     put_sprite(vars.mlx, tab);
 	mlx_put_image_to_window(vars.mlx, vars.win, img.img, 0, 0);
-    mlx_hook(vars.win, 17, 1L<<0, ft_hook, &vars);
     mlx_hook(vars.win, 2, 1L<<0, ft_hook, &vars);
     mlx_mouse_hook(vars.win, ft_hook, &vars);
     mlx_loop(vars.mlx);
