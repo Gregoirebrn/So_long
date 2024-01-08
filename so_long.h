@@ -6,7 +6,7 @@
 /*   By: grebrune <grebrune@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 17:01:49 by grebrune          #+#    #+#             */
-/*   Updated: 2024/01/03 18:23:10 by grebrune         ###   ########.fr       */
+/*   Updated: 2024/01/08 16:46:58 by grebrune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,15 @@ typedef struct s_vars
 	void	*win;
 }	t_vars;
 
+typedef struct s_img
+{
+    void	*door;
+    void	*wall;
+    void	*niki;
+    void	*empty;
+    void	*knife;
+}	t_img;
+
 char	**map_maker(void);
 int		check_border(char **tab);
 int		check_val(char **tab);
@@ -47,9 +56,12 @@ int		check_path(char **tab);
 void	find_path(char **tab, size_t y, size_t x);
 int		still_c(char **tab);
 size_t	tab_len(char **tab);
+
+int     close_win(t_vars *vars);
 int		ft_hook(int keycode, t_vars *vars);
 
 char	*find_val(char **map, int x, int i);
 void	put_sprite(void *mlx, void *win, char **tab);
+void    xpm_to_img(void *mlx, t_img *img);
 
 #endif

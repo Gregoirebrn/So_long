@@ -86,7 +86,7 @@ int	still_c(char **tab)
 		}
 		x++;
 	}
-	return (ft_putstr_fd("Error : All collectibles are reachable.", 1), 0);
+	return (0);
 }
 
 void	find_path(char **tab, size_t x, size_t y)

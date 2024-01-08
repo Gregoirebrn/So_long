@@ -6,12 +6,14 @@
 #    By: grebrune <grebrune@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/07 16:45:45 by grebrune          #+#    #+#              #
-#    Updated: 2024/01/03 16:56:14 by grebrune         ###   ########.fr        #
+#    Updated: 2024/01/08 16:50:36 by grebrune         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCS		:= 	so_long.c\
 				parsing.c\
+				print_map.c\
+				close_win.c\
 
 SRCS_D		:=	#
 

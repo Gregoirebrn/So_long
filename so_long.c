@@ -6,19 +6,11 @@
 /*   By: grebrune <grebrune@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 16:23:49 by grebrune          #+#    #+#             */
-/*   Updated: 2024/01/08 15:55:09 by grebrune         ###   ########.fr       */
+/*   Updated: 2024/01/08 17:12:06 by grebrune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-int	ft_hook(int keycode, t_vars *vars)
-{
-    printf("%d\n", keycode);
-    if (keycode == 65307 || keycode == 'a')
-        mlx_destroy_window(vars->mlx, vars->win);
-    return (0);
-}
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
@@ -26,36 +18,6 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 
 	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
 	*(unsigned int *)dst = color;
-}
-
-void    put_sprite(void *mlx, void *win, char **map)
-{
-    int     i;
-    int     x;
-    void    *img;
-    int		img_width;
-    int		img_height;
-
-    x = 0;
-    while (map[x])
-    {
-        i = 0;
-        while (map[x][i])
-        {
-            if (map[x][i] == '0')
-                img = mlx_xpm_file_to_image(mlx, "empty.xpm", &img_width, &img_height);
-            if (map[x][i] == '1')
-                img = mlx_xpm_file_to_image(mlx, "empty.xpm", &img_width, &img_height);
-            if (map[x][i] == 'C')
-                img = mlx_xpm_file_to_image(mlx, "empty.xpm", &img_width, &img_height);
-            if (map[x][i] == 'P')
-                img = mlx_xpm_file_to_image(mlx, "empty.xpm", &img_width, &img_height);
-            mlx_put_image_to_window(mlx, win, img, i, x);
-            i++;
-        }
-        x++;
-    }
-    my_mlx_pixel_put(img, img_width, img_height, 0x00FF0000);
 }
 
 char    **map_maker(void)
@@ -74,8 +36,7 @@ char    **map_maker(void)
         return (NULL);
     return (close(fd), ft_putstr_fd("Good!\n", 1), tab);
 }
-// have to close win with cross
-// print map in win with put_sprite
+
 int	main(void)
 {
     char **tab;
@@ -91,8 +52,8 @@ int	main(void)
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, \
 	&img.endian);
     put_sprite(vars.mlx, vars.win, tab);
-	mlx_put_image_to_window(vars.mlx, vars.win, img.img, 0, 0);
     mlx_hook(vars.win, 2, 1L<<0, ft_hook, &vars);
+    mlx_hook(vars.win, 17, 1L<<0, close_win, &vars);
     mlx_mouse_hook(vars.win, ft_hook, &vars);
     mlx_loop(vars.mlx);
     return (0);

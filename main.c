@@ -12,54 +12,7 @@
 
 #include "so_long.h"
 
-char	*find_val(char **map, int x, int i)
-{
-	static const char	*tab[4] = {"wall.png", "empty.png", \
-	"collect.png", "door.png"};
-	int					val;
 
-	val = map[x][i] - 48;
-	return ((char *)tab[val]);
-}
-
-void	put_sprite(void *mlx, char **map, void *img)
-{
-	int	i;
-	int	x;
-	int	img_width;
-	int	img_height;
-
-	x = 0;
-	while (map[x])
-	{
-		i = 0;
-		while (map[x][i])
-		{
-			img = mlx_xpm_file_to_image(mlx, find_val(map, x, i), &img_width, &img_height);
-			i++;
-		}
-		x++;
-	}
-}
-
-int	main(void)
-{
-	void *mlx;
-	void *img;
-	char *relative_path = "./wall.xpm";
-	int img_width;
-	int img_height;
-
-	vars.mlx = mlx_init();
-	img = mlx_xpm_file_to_image(mlx, relative_path, &img_width, &img_height);
-	vars.win = mlx_new_window(vars.mlx, 1920, 1080, "So_long");
-	img.img = mlx_new_image(vars.mlx, 1920, 1080);
-	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
-	put_sprite(vars.mlx, tab, img.img);
-	mlx_put_image_to_window(vars.mlx, vars.win, img.img, 0, 0);
-	mlx_hook(vars.win, 2, 1L<<0, ft_hook, &vars);
-	mlx_mouse_hook(vars.win, ft_hook, &vars);
-	mlx_loop(vars.mlx);
 }
 
 
