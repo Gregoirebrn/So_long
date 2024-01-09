@@ -59,7 +59,7 @@ size_t	tab_len(char **tab);
 
 void    make_window(char **tab);
 int     close_win(t_vars *vars);
-int		ft_hook(int keycode, t_vars *vars);
+int		key_hook(int keycode, t_vars *vars);
 
 void	put_sprite(void *mlx, void *win, char **tab);
 void    xpm_to_img(void *mlx, t_img *img);

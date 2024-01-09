@@ -6,7 +6,7 @@
 /*   By: grebrune <grebrune@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 16:23:49 by grebrune          #+#    #+#             */
-/*   Updated: 2024/01/08 17:12:26 by grebrune         ###   ########.fr       */
+/*   Updated: 2024/01/09 15:36:27 by grebrune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,27 +20,27 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-char    **map_maker(void)
+char	**map_maker(void)
 {
-    int		fd;
-    char	line[1024];
-    char    **tab;
+	int		fd;
+	char	line[1024];
+	char	**tab;
 
-    fd = open("map.ber", O_RDONLY);
-    if (fd == -1)
-        return (ft_putstr_fd("Error : Can't open file.", 1), NULL);
-    if ( 0 > read(fd ,line, 1024))
-        return (ft_putstr_fd("Error : Can't read file.", 1), NULL);
-    tab = ft_split(line, '\n');
-    if (0 != check_border(tab) || check_val(tab) != 0 || check_path(tab) != 0)
-        return (NULL);
-    return (close(fd), ft_putstr_fd("Good!\n", 1), tab);
+	fd = open("map.ber", O_RDONLY);
+	if (fd == -1)
+		return (ft_putstr_fd("Error : Can't open file.", 1), NULL);
+	if (0 > read(fd, line, 1024))
+		return (ft_putstr_fd("Error : Can't read file.", 1), NULL);
+	tab = ft_split(line, '\n');
+	if (0 != check_border(tab) || check_val(tab) != 0 || check_path(tab) != 0)
+		return (NULL);
+	return (close(fd), ft_putstr_fd("Good!\n", 1), tab);
 }
 
 void    make_window(char **tab)
 {
 	t_data	img;
-    t_vars vars;
+	t_vars	vars;
 
 	vars.mlx = mlx_init();
 	vars.win = mlx_new_window(vars.mlx, 1920, 1080, "So_long");
