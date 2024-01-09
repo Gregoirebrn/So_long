@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../so_long.h"
 
 int	check_border(char **tab)
 {
@@ -127,7 +127,7 @@ char	**tab_dup(char **tab)
 	return (tmp);
 }
 
-int	check_path(char **tab, t_vars vars)
+int	check_path(char **tab, t_vars *vars)
 {
 	size_t	y;
 	size_t	x;
@@ -142,8 +142,8 @@ int	check_path(char **tab, t_vars vars)
 		{
 			if (tab[x][y] == 'P')
 			{
-				vars.x = x;
-				vars.y = y;
+				vars->x = x;
+				vars->y = y;
 				find_path(tmp, x, y);
 			}
 			y++;

@@ -6,22 +6,22 @@
 /*   By: grebrune <grebrune@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 16:25:00 by grebrune          #+#    #+#             */
-/*   Updated: 2024/01/08 17:03:34 by grebrune         ###   ########.fr       */
+/*   Updated: 2024/01/09 19:51:19 by grebrune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../so_long.h"
 
 void    xpm_to_img(void *mlx, t_img *img)
 {
     int		img_width;
     int		img_height;
 
-    img->empty = mlx_xpm_file_to_image(mlx, "empty.xpm", &img_width, &img_height);
-    img->wall = mlx_xpm_file_to_image(mlx, "wall.xpm", &img_width, &img_height);
-    img->knife = mlx_xpm_file_to_image(mlx, "knife.xpm", &img_width, &img_height);
-    img->niki = mlx_xpm_file_to_image(mlx, "niki.xpm", &img_width, &img_height);
-    img->door = mlx_xpm_file_to_image(mlx, "door.xpm", &img_width, &img_height);
+    img->empty = mlx_xpm_file_to_image(mlx, "img/empty.xpm", &img_width, &img_height);
+    img->wall = mlx_xpm_file_to_image(mlx, "img/wall.xpm", &img_width, &img_height);
+    img->knife = mlx_xpm_file_to_image(mlx, "img/knife.xpm", &img_width, &img_height);
+    img->niki = mlx_xpm_file_to_image(mlx, "img/niki.xpm", &img_width, &img_height);
+    img->door = mlx_xpm_file_to_image(mlx, "img/door.xpm", &img_width, &img_height);
 }
 
 void    put_sprite(void *mlx, void *win, char **map)
@@ -37,6 +37,7 @@ void    put_sprite(void *mlx, void *win, char **map)
     pixel_x = 0;
     while (map[x])
     {
+		printf("%s\n", map[x]);
         i = 0;
         pixel_i = 0;
         while (map[x][i])
@@ -57,4 +58,5 @@ void    put_sprite(void *mlx, void *win, char **map)
         x++;
         pixel_x += 60;
     }
+	printf("\n");
 }

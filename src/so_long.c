@@ -6,21 +6,13 @@
 /*   By: grebrune <grebrune@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 16:23:49 by grebrune          #+#    #+#             */
-/*   Updated: 2024/01/09 18:13:26 by grebrune         ###   ########.fr       */
+/*   Updated: 2024/01/09 19:41:20 by grebrune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../so_long.h"
 
-//void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
-//{
-//	char	*dst;
-//
-//	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
-//	*(unsigned int *)dst = color;
-//}
-
-char	**map_maker(t_vars vars)
+char	**map_maker(t_vars *vars)
 {
 	int		fd;
 	char	line[1024];
@@ -60,7 +52,7 @@ int	main(void)
 	t_vars	vars;
 
 	ft_bzero(&vars, sizeof(vars));
-    tab = map_maker(vars);
+    tab = map_maker(&vars);
     if (!tab)
         return (1);
     make_window(tab, vars);

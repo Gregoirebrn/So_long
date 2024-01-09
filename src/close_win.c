@@ -6,15 +6,15 @@
 /*   By: grebrune <grebrune@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 17:08:30 by grebrune          #+#    #+#             */
-/*   Updated: 2024/01/09 16:21:49 by grebrune         ###   ########.fr       */
+/*   Updated: 2024/01/09 19:58:20 by grebrune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../so_long.h"
 
 int	key_hook(int keycode, t_vars *vars)
 {
-	if (keycode == 'W' || keycode == 'A' || keycode == 'D')
+	if (keycode == 'w' || keycode == 'a' || keycode == 'd' || keycode == 's')
 		player_move(keycode, vars);
 	if (keycode == 65307)
 	{
