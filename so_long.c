@@ -6,7 +6,7 @@
 /*   By: grebrune <grebrune@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 16:23:49 by grebrune          #+#    #+#             */
-/*   Updated: 2024/01/08 17:12:06 by grebrune         ###   ########.fr       */
+/*   Updated: 2024/01/08 17:12:26 by grebrune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,15 +37,11 @@ char    **map_maker(void)
     return (close(fd), ft_putstr_fd("Good!\n", 1), tab);
 }
 
-int	main(void)
+void    make_window(char **tab)
 {
-    char **tab;
 	t_data	img;
     t_vars vars;
 
-    tab = map_maker();
-    if (!tab)
-        return (1);
 	vars.mlx = mlx_init();
 	vars.win = mlx_new_window(vars.mlx, 1920, 1080, "So_long");
 	img.img = mlx_new_image(vars.mlx, 1920, 1080);
@@ -56,5 +52,14 @@ int	main(void)
     mlx_hook(vars.win, 17, 1L<<0, close_win, &vars);
     mlx_mouse_hook(vars.win, ft_hook, &vars);
     mlx_loop(vars.mlx);
+}
+int	main(void)
+{
+    char **tab;
+
+    tab = map_maker();
+    if (!tab)
+        return (1);
+    make_window(tab);
     return (0);
 }
