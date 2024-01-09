@@ -6,7 +6,7 @@
 /*   By: grebrune <grebrune@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 19:58:30 by grebrune          #+#    #+#             */
-/*   Updated: 2024/01/03 18:02:28 by grebrune         ###   ########.fr       */
+/*   Updated: 2024/01/09 18:13:26 by grebrune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,7 @@ char	**tab_dup(char **tab)
 	return (tmp);
 }
 
-int	check_path(char **tab)
+int	check_path(char **tab, t_vars vars)
 {
 	size_t	y;
 	size_t	x;
@@ -141,7 +141,11 @@ int	check_path(char **tab)
 		while (tab[y])
 		{
 			if (tab[x][y] == 'P')
+			{
+				vars.x = x;
+				vars.y = y;
 				find_path(tmp, x, y);
+			}
 			y++;
 		}
 		x++;

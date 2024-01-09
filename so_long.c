@@ -6,21 +6,21 @@
 /*   By: grebrune <grebrune@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 16:23:49 by grebrune          #+#    #+#             */
-/*   Updated: 2024/01/09 15:36:27 by grebrune         ###   ########.fr       */
+/*   Updated: 2024/01/09 18:13:26 by grebrune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
-{
-	char	*dst;
+//void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
+//{
+//	char	*dst;
+//
+//	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
+//	*(unsigned int *)dst = color;
+//}
 
-	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
-	*(unsigned int *)dst = color;
-}
-
-char	**map_maker(void)
+char	**map_maker(t_vars vars)
 {
 	int		fd;
 	char	line[1024];
@@ -32,34 +32,37 @@ char	**map_maker(void)
 	if (0 > read(fd, line, 1024))
 		return (ft_putstr_fd("Error : Can't read file.", 1), NULL);
 	tab = ft_split(line, '\n');
-	if (0 != check_border(tab) || check_val(tab) != 0 || check_path(tab) != 0)
+	if (0 != check_border(tab) || check_val(tab) != 0 || check_path(tab, vars) != 0)
 		return (NULL);
 	return (close(fd), ft_putstr_fd("Good!\n", 1), tab);
 }
 
-void    make_window(char **tab)
+void    make_window(char **tab, t_vars vars)
 {
 	t_data	img;
-	t_vars	vars;
 
+	vars.map = tab;
 	vars.mlx = mlx_init();
 	vars.win = mlx_new_window(vars.mlx, 1920, 1080, "So_long");
 	img.img = mlx_new_image(vars.mlx, 1920, 1080);
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, \
 	&img.endian);
     put_sprite(vars.mlx, vars.win, tab);
-    mlx_hook(vars.win, 2, 1L<<0, ft_hook, &vars);
+    mlx_hook(vars.win, 2, 1L<<0, key_hook, &vars);
     mlx_hook(vars.win, 17, 1L<<0, close_win, &vars);
-    mlx_mouse_hook(vars.win, ft_hook, &vars);
+    mlx_mouse_hook(vars.win, key_hook, &vars);
     mlx_loop(vars.mlx);
 }
+
 int	main(void)
 {
-    char **tab;
+    char	**tab;
+	t_vars	vars;
 
-    tab = map_maker();
+	ft_bzero(&vars, sizeof(vars));
+    tab = map_maker(vars);
     if (!tab)
         return (1);
-    make_window(tab);
+    make_window(tab, vars);
     return (0);
 }
