@@ -6,7 +6,7 @@
 /*   By: grebrune <grebrune@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 16:04:31 by grebrune          #+#    #+#             */
-/*   Updated: 2024/01/09 20:00:12 by grebrune         ###   ########.fr       */
+/*   Updated: 2024/01/09 20:02:04 by grebrune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	map_move(t_vars *vars, int y, int x)
 {
 	static size_t count;
 
-	if (vars->map[vars->x + x][vars->y + y] != 1)
+	if (vars->map[vars->x + x][vars->y + y] != '1')
 	{
 		count++;
 		vars->map[vars->x][vars->y] = '0';

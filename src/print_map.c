@@ -6,7 +6,7 @@
 /*   By: grebrune <grebrune@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 16:25:00 by grebrune          #+#    #+#             */
-/*   Updated: 2024/01/09 19:51:19 by grebrune         ###   ########.fr       */
+/*   Updated: 2024/01/09 19:54:28 by grebrune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ void    put_sprite(void *mlx, void *win, char **map)
     pixel_x = 0;
     while (map[x])
     {
-		printf("%s\n", map[x]);
         i = 0;
         pixel_i = 0;
         while (map[x][i])
@@ -58,5 +57,4 @@ void    put_sprite(void *mlx, void *win, char **map)
         x++;
         pixel_x += 60;
     }
-	printf("\n");
 }

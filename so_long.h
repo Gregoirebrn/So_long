@@ -6,7 +6,7 @@
 /*   By: grebrune <grebrune@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 17:01:49 by grebrune          #+#    #+#             */
-/*   Updated: 2024/01/09 19:58:20 by grebrune         ###   ########.fr       */
+/*   Updated: 2024/01/09 20:00:12 by grebrune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,6 @@ void	put_sprite(void *mlx, void *win, char **tab);
 void    xpm_to_img(void *mlx, t_img *img);
 
 void	player_move(int keycode, t_vars *vars);
-void	map_move(t_vars *vars, int a, int o);
+void	map_move(t_vars *vars, int y, int x);
 
 #endif
