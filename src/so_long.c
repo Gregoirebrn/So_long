@@ -6,7 +6,7 @@
 /*   By: grebrune <grebrune@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 16:23:49 by grebrune          #+#    #+#             */
-/*   Updated: 2024/01/09 19:41:20 by grebrune         ###   ########.fr       */
+/*   Updated: 2024/01/10 14:12:10 by grebrune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,15 @@ char	**map_maker(t_vars *vars)
 	int		fd;
 	char	line[1024];
 	char	**tab;
+	size_t	i;
 
 	fd = open("map.ber", O_RDONLY);
 	if (fd == -1)
 		return (ft_putstr_fd("Error : Can't open file.", 1), NULL);
-	if (0 > read(fd, line, 1024))
+	if (0 > read(fd, NULL, 0))
 		return (ft_putstr_fd("Error : Can't read file.", 1), NULL);
+	i = read(fd, line, 1024);
+	line[i] = '\0';
 	tab = ft_split(line, '\n');
 	if (0 != check_border(tab) || check_val(tab) != 0 || check_path(tab, vars) != 0)
 		return (NULL);
@@ -56,5 +59,5 @@ int	main(void)
     if (!tab)
         return (1);
     make_window(tab, vars);
-    return (0);
+    return (ft_free(tab), 0);
 }

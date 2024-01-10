@@ -6,7 +6,7 @@
 /*   By: grebrune <grebrune@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 17:01:49 by grebrune          #+#    #+#             */
-/*   Updated: 2024/01/09 20:00:12 by grebrune         ###   ########.fr       */
+/*   Updated: 2024/01/09 23:24:28 by grebrune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ typedef struct s_vars
 	char	**map;
 	size_t	x;
 	size_t	y;
+	size_t move;
 }	t_vars;
 
 typedef struct s_img
@@ -62,6 +63,7 @@ size_t	tab_len(char **tab);
 void    make_window(char **tab, t_vars vars);
 int     close_win(t_vars *vars);
 int		key_hook(int keycode, t_vars *vars);
+void	ft_free(char **tab);
 
 void	put_sprite(void *mlx, void *win, char **tab);
 void    xpm_to_img(void *mlx, t_img *img);

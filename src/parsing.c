@@ -6,7 +6,7 @@
 /*   By: grebrune <grebrune@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 19:58:30 by grebrune          #+#    #+#             */
-/*   Updated: 2024/01/09 18:13:26 by grebrune         ###   ########.fr       */
+/*   Updated: 2024/01/10 13:58:00 by grebrune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ int	still_c(char **tab)
 		}
 		x++;
 	}
-	return (0);
+	return (ft_free(tab), 0);
 }
 
 void	find_path(char **tab, size_t x, size_t y)
@@ -117,7 +117,7 @@ char	**tab_dup(char **tab)
 	char	**tmp;
 
 	x = 0;
-	tmp = ft_calloc(sizeof(char *), tab_len(tab));
+	tmp = ft_calloc(sizeof(char *), tab_len(tab) + 1);
 	while (tab[x])
 	{
 		tmp[x] = ft_strdup(tab[x]);

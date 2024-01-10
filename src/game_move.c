@@ -6,7 +6,7 @@
 /*   By: grebrune <grebrune@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 16:04:31 by grebrune          #+#    #+#             */
-/*   Updated: 2024/01/09 20:02:04 by grebrune         ###   ########.fr       */
+/*   Updated: 2024/01/09 23:24:28 by grebrune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,9 @@ void	player_move(int keycode, t_vars *vars)
 
 void	map_move(t_vars *vars, int y, int x)
 {
-	static size_t count;
-
 	if (vars->map[vars->x + x][vars->y + y] != '1')
 	{
-		count++;
+		vars->move += 1;
 		vars->map[vars->x][vars->y] = '0';
 		vars->map[vars->x + x][vars->y + y] = 'P';
 		vars->x += x;
