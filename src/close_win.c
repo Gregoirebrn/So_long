@@ -6,7 +6,7 @@
 /*   By: grebrune <grebrune@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 17:08:30 by grebrune          #+#    #+#             */
-/*   Updated: 2024/01/10 14:02:54 by grebrune         ###   ########.fr       */
+/*   Updated: 2024/01/11 14:01:29 by grebrune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	ft_free(char **tab)
 	}
 	free(tab);
 }
+
 int	key_hook(int keycode, t_vars *vars)
 {
 	if (keycode == 'w' || keycode == 'a' || keycode == 'd' || keycode == 's')
@@ -43,4 +44,11 @@ int	close_win(t_vars *vars)
 	mlx_loop_end(vars->mlx);
 	mlx_destroy_window(vars->mlx, vars->win);
 	return (0);
+}
+
+void	set_to_zero(t_val *val)
+{
+	val->p_val = 0;
+	val->e_val = 0;
+	val->c_val = 0;
 }

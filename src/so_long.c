@@ -6,7 +6,7 @@
 /*   By: grebrune <grebrune@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 16:23:49 by grebrune          #+#    #+#             */
-/*   Updated: 2024/01/10 14:12:10 by grebrune         ###   ########.fr       */
+/*   Updated: 2024/01/11 14:15:05 by grebrune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ char	**map_maker(t_vars *vars)
 	i = read(fd, line, 1024);
 	line[i] = '\0';
 	tab = ft_split(line, '\n');
-	if (0 != check_border(tab) || check_val(tab) != 0 || check_path(tab, vars) != 0)
+	if (check_border(tab) || check_val(tab) || check_path(tab, vars))
 		return (NULL);
 	return (close(fd), ft_putstr_fd("Good!\n", 1), tab);
 }
@@ -38,13 +38,13 @@ void	make_window(char **tab, t_vars vars)
 
 	vars.map = tab;
 	vars.mlx = mlx_init();
-	vars.win = mlx_new_window(vars.mlx, 1920, 1080, "So_long");
-	img.img = mlx_new_image(vars.mlx, 1920, 1080);
-	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, \
-	&img.endian);
-	put_sprite(vars.mlx, vars.win, tab);
-	mlx_hook(vars.win, 2, 1L<<0, key_hook, &vars);
-	mlx_hook(vars.win, 17, 1L<<0, close_win, &vars);
+	vars.win = mlx_new_window(vars.mlx, 780, 300, "So_long");
+	img.img = mlx_new_image(vars.mlx, 780, 300);
+	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, \
+	&img.line_length, &img.endian);
+	put_sprite(vars);
+	mlx_hook(vars.win, 2, 1L << 0, key_hook, &vars);
+	mlx_hook(vars.win, 17, 1L << 0, close_win, &vars);
 	mlx_mouse_hook(vars.win, key_hook, &vars);
 	mlx_loop(vars.mlx);
 }

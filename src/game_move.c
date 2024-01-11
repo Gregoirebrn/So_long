@@ -6,7 +6,7 @@
 /*   By: grebrune <grebrune@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 16:04:31 by grebrune          #+#    #+#             */
-/*   Updated: 2024/01/09 23:24:28 by grebrune         ###   ########.fr       */
+/*   Updated: 2024/01/11 13:37:06 by grebrune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,14 @@
 void	player_move(int keycode, t_vars *vars)
 {
 	if (keycode == 'w')
-		map_move(vars, 0 , -1);
+		map_move(vars, 0, -1);
 	if (keycode == 'a')
 		map_move(vars, -1, 0);
 	if (keycode == 'd')
 		map_move(vars, +1, 0);
 	if (keycode == 's')
 		map_move(vars, 0, 1);
-	put_sprite(vars->mlx, vars->win, vars->map);
+	put_sprite(*vars);
 }
 
 void	map_move(t_vars *vars, int y, int x)

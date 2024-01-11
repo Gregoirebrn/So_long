@@ -6,7 +6,7 @@
 /*   By: grebrune <grebrune@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 17:01:49 by grebrune          #+#    #+#             */
-/*   Updated: 2024/01/11 13:23:41 by grebrune         ###   ########.fr       */
+/*   Updated: 2024/01/11 14:00:57 by grebrune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ typedef struct s_img
 	void	*niki;
 	void	*empty;
 	void	*knife;
+	int	i;
+	int	x;
 }	t_img;
 
 char	**map_maker(t_vars *vars);
@@ -65,9 +67,11 @@ void	make_window(char **tab, t_vars vars);
 int		close_win(t_vars *vars);
 int		key_hook(int keycode, t_vars *vars);
 void	ft_free(char **tab);
+void	set_to_zero(t_val *val);
 
-void	put_sprite(void *mlx, void *win, char **tab);
+void	put_sprite(t_vars vars);
 void	xpm_to_img(void *mlx, t_img *img);
+void	find_img(t_vars *vars, t_img img, char c);
 
 void	player_move(int keycode, t_vars *vars);
 void	map_move(t_vars *vars, int y, int x);

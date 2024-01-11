@@ -6,7 +6,7 @@
 /*   By: grebrune <grebrune@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 16:25:00 by grebrune          #+#    #+#             */
-/*   Updated: 2024/01/11 13:19:11 by grebrune         ###   ########.fr       */
+/*   Updated: 2024/01/11 13:53:29 by grebrune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,47 +14,50 @@
 
 void	xpm_to_img(void *mlx, t_img *img)
 {
-	int		img_width;
-	int		img_height;
+	int		width;
+	int		height;
 
-	img->empty = mlx_xpm_file_to_image(mlx, "img/empty.xpm", &img_width, &img_height);
-	img->wall = mlx_xpm_file_to_image(mlx, "img/wall.xpm", &img_width, &img_height);
-	img->knife = mlx_xpm_file_to_image(mlx, "img/knife.xpm", &img_width, &img_height);
-	img->niki = mlx_xpm_file_to_image(mlx, "img/niki.xpm", &img_width, &img_height);
-	img->door = mlx_xpm_file_to_image(mlx, "img/door.xpm", &img_width, &img_height);
+	img->empty = mlx_xpm_file_to_image(mlx, "img/empty.xpm", &width, &height);
+	img->wall = mlx_xpm_file_to_image(mlx, "img/wall.xpm", &width, &height);
+	img->knife = mlx_xpm_file_to_image(mlx, "img/knife.xpm", &width, &height);
+	img->niki = mlx_xpm_file_to_image(mlx, "img/niki.xpm", &width, &height);
+	img->door = mlx_xpm_file_to_image(mlx, "img/door.xpm", &width, &height);
 }
 
-void	put_sprite(void *mlx, void *win, char **map)
+void	find_img(t_vars *vars, t_img img, char c)
+{
+	if (c == '0')
+		mlx_put_image_to_window(vars->mlx, vars->win, img.empty, img.i, img.x);
+	if (c == '1')
+		mlx_put_image_to_window(vars->mlx, vars->win, img.wall, img.i, img.x);
+	if (c == 'C')
+		mlx_put_image_to_window(vars->mlx, vars->win, img.knife, img.i, img.x);
+	if (c == 'P')
+		mlx_put_image_to_window(vars->mlx, vars->win, img.niki, img.i, img.x);
+	if (c == 'E')
+		mlx_put_image_to_window(vars->mlx, vars->win, img.door, img.i, img.x);
+}
+
+void	put_sprite(t_vars vars)
 {
 	int		i;
 	int		x;
-	int		pixel_i;
-	int		pixel_x;
 	t_img	img;
 
-	xpm_to_img(mlx, &img);
+	xpm_to_img(vars.mlx, &img);
 	x = 0;
-	pixel_x = 0;
-	while (map[x])
+	img.x = 0;
+	while (vars.map[x])
 	{
 		i = 0;
-		pixel_i = 0;
-		while (map[x][i])
+		img.i = 0;
+		while (vars.map[x][i])
 		{
-			if (map[x][i] == '0')
-				mlx_put_image_to_window(mlx, win, img.empty, pixel_i, pixel_x);
-			if (map[x][i] == '1')
-				mlx_put_image_to_window(mlx, win, img.wall, pixel_i, pixel_x);
-			if (map[x][i] == 'C')
-				mlx_put_image_to_window(mlx, win, img.knife, pixel_i, pixel_x);
-			if (map[x][i] == 'P')
-				mlx_put_image_to_window(mlx, win, img.niki, pixel_i, pixel_x);
-			if (map[x][i] == 'E')
-				mlx_put_image_to_window(mlx, win, img.door, pixel_i, pixel_x);
+			find_img(&vars, img, vars.map[x][i]);
 			i++;
-			pixel_i += 60;
+			img.i += 60;
 		}
 		x++;
-		pixel_x += 60;
+		img.x += 60;
 	}
 }
