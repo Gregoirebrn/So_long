@@ -10,18 +10,18 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../so_long.h"
 
 void	xpm_to_img(void *mlx, t_img *img)
 {
 	int		img_width;
 	int		img_height;
 
-	img->empty = mlx_xpm_file_to_image(mlx, "empty.xpm", &img_width, &img_height);
-	img->wall = mlx_xpm_file_to_image(mlx, "wall.xpm", &img_width, &img_height);
-	img->knife = mlx_xpm_file_to_image(mlx, "knife.xpm", &img_width, &img_height);
-	img->niki = mlx_xpm_file_to_image(mlx, "niki.xpm", &img_width, &img_height);
-	img->door = mlx_xpm_file_to_image(mlx, "door.xpm", &img_width, &img_height);
+	img->empty = mlx_xpm_file_to_image(mlx, "img/empty.xpm", &img_width, &img_height);
+	img->wall = mlx_xpm_file_to_image(mlx, "img/wall.xpm", &img_width, &img_height);
+	img->knife = mlx_xpm_file_to_image(mlx, "img/knife.xpm", &img_width, &img_height);
+	img->niki = mlx_xpm_file_to_image(mlx, "img/niki.xpm", &img_width, &img_height);
+	img->door = mlx_xpm_file_to_image(mlx, "img/door.xpm", &img_width, &img_height);
 }
 
 void	put_sprite(void *mlx, void *win, char **map)
