@@ -6,7 +6,7 @@
 /*   By: grebrune <grebrune@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 16:25:00 by grebrune          #+#    #+#             */
-/*   Updated: 2024/01/11 15:36:33 by grebrune         ###   ########.fr       */
+/*   Updated: 2024/01/11 16:12:23 by grebrune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	xpm_to_img(void *mlx, t_img *img)
 	img->niki = mlx_xpm_file_to_image(mlx, "img/niki.xpm", &width, &height);
 	img->door = mlx_xpm_file_to_image(mlx, "img/door.xpm", &width, &height);
 	img->score = mlx_xpm_file_to_image(mlx, "img/score.xpm", &width, &height);
+	img->exit = mlx_xpm_file_to_image(mlx, "img/exit.xpm", &width, &height);
 }
 
 void	find_img(t_vars *vars, t_img img, char c)
@@ -39,6 +40,8 @@ void	find_img(t_vars *vars, t_img img, char c)
 		mlx_put_image_to_window(vars->mlx, vars->win, img.niki, img.i, img.x);
 	if (c == 'E')
 		mlx_put_image_to_window(vars->mlx, vars->win, img.door, img.i, img.x);
+	if (c == 'F')
+		mlx_put_image_to_window(vars->mlx, vars->win, img.exit, img.i, img.x);
 }
 
 void	put_sprite(t_vars vars)

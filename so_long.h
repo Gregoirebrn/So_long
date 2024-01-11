@@ -6,7 +6,7 @@
 /*   By: grebrune <grebrune@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 17:01:49 by grebrune          #+#    #+#             */
-/*   Updated: 2024/01/11 15:02:47 by grebrune         ###   ########.fr       */
+/*   Updated: 2024/01/11 16:50:25 by grebrune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ typedef struct s_vars
 	char	**map;
 	size_t	x;
 	size_t	y;
+	size_t	x_e;
+	size_t	y_e;
 	int		move;
 }	t_vars;
 
@@ -51,30 +53,32 @@ typedef struct s_img
 	void	*empty;
 	void	*knife;
 	void	*score;
+	void	*exit;
 	int		i;
 	int		x;
 }	t_img;
 
-char	**map_maker(t_vars *vars);
+char	**map_maker(t_vars *vars, t_val *val);
 int		check_border(char **tab);
-int		check_val(char **tab);
+int		check_val(char **tab, t_val *val);
 int		check_path(char **tab, t_vars *vars);
 void	find_path(char **tab, size_t y, size_t x);
 int		still_c(char **tab);
 size_t	tab_len(char **tab);
 char	**tab_dup(char **tab);
 
-void	make_window(char **tab, t_vars vars);
+void	make_window(char **tab, t_vars vars, t_val val);
 int		close_win(t_vars *vars);
-int		key_hook(int keycode, t_vars *vars);
+int		key_hook(int keycode, t_vars *vars, t_val *val);
 void	ft_free(char **tab);
 void	set_to_zero(t_val *val);
 
 void	put_sprite(t_vars vars);
+void	end_game(t_vars vars, t_val val);
 void	xpm_to_img(void *mlx, t_img *img);
 void	find_img(t_vars *vars, t_img img, char c);
 
-void	player_move(int keycode, t_vars *vars);
-void	map_move(t_vars *vars, int y, int x);
+void	player_move(int keycode, t_vars *vars, t_val *val);
+void	map_move(t_vars *vars, int y, int x, t_val *val);
 
 #endif

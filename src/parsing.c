@@ -6,7 +6,7 @@
 /*   By: grebrune <grebrune@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 19:58:30 by grebrune          #+#    #+#             */
-/*   Updated: 2024/01/11 14:07:01 by grebrune         ###   ########.fr       */
+/*   Updated: 2024/01/11 17:31:27 by grebrune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,12 @@ int	check_border(char **tab)
 	return (0);
 }
 
-int	check_val(char **tab)
+int	check_val(char **tab, t_val *val)
 {
 	size_t	y;
 	size_t	x;
-	t_val	val;
 
-	set_to_zero(&val);
+	set_to_zero(val);
 	x = 0;
 	while (tab[x])
 	{
@@ -51,16 +50,17 @@ int	check_val(char **tab)
 		while (tab[x][y])
 		{
 			if (tab[x][y] == 'P')
-				val.p_val++;
+				val->p_val++;
 			else if (tab[x][y] == 'E')
-				val.e_val++;
+				val->e_val++;
 			else if (tab[x][y] == 'C')
-				val.c_val++;
+				val->c_val++;
 			y++;
+			printf("----------%zu----------", val->c_val);
 		}
 		x++;
 	}
-	if (val.p_val != 1 || val.e_val != 1 || val.c_val < 1)
+	if (val->p_val != 1 || val->e_val != 1 || val->c_val < 1)
 		return (ft_putstr_fd("Error : Missing item in the map.\n", 1), 1);
 	return (0);
 }
@@ -99,6 +99,21 @@ void	find_path(char **tab, size_t x, size_t y)
 	}
 }
 
+void	find_place(char **tmp, char **tab, t_vars *vars, size_t y, size_t x)
+{
+	if (tab[x][y] == 'P')
+	{
+		vars->x = x;
+		vars->y = y;
+		find_path(tmp, x, y);
+	}
+	if (tab[x][y] == 'E')
+	{
+		vars->x_e = x;
+		vars->y_e = y;
+	}
+}
+
 int	check_path(char **tab, t_vars *vars)
 {
 	size_t	y;
@@ -112,12 +127,7 @@ int	check_path(char **tab, t_vars *vars)
 		y = 0;
 		while (tab[y])
 		{
-			if (tab[x][y] == 'P')
-			{
-				vars->x = x;
-				vars->y = y;
-				find_path(tmp, x, y);
-			}
+			find_place(tmp, tab, vars, y, x);
 			y++;
 		}
 		x++;
