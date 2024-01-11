@@ -6,7 +6,7 @@
 /*   By: grebrune <grebrune@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 17:08:30 by grebrune          #+#    #+#             */
-/*   Updated: 2024/01/11 14:01:29 by grebrune         ###   ########.fr       */
+/*   Updated: 2024/01/11 14:28:37 by grebrune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,16 +30,13 @@ int	key_hook(int keycode, t_vars *vars)
 	if (keycode == 'w' || keycode == 'a' || keycode == 'd' || keycode == 's')
 		player_move(keycode, vars);
 	if (keycode == 65307)
-	{
-		ft_putnbr_fd((int)vars->move, 1);
-		mlx_loop_end(vars->mlx);
-		mlx_destroy_window(vars->mlx, vars->win);
-	}
+		close_win(vars);
 	return (0);
 }
 
 int	close_win(t_vars *vars)
 {
+//	ft_free(vars->map);
 	ft_putnbr_fd((int)vars->move, 1);
 	mlx_loop_end(vars->mlx);
 	mlx_destroy_window(vars->mlx, vars->win);

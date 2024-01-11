@@ -45,7 +45,6 @@ void	make_window(char **tab, t_vars vars)
 	put_sprite(vars);
 	mlx_hook(vars.win, 2, 1L << 0, key_hook, &vars);
 	mlx_hook(vars.win, 17, 1L << 0, close_win, &vars);
-	mlx_mouse_hook(vars.win, key_hook, &vars);
 	mlx_loop(vars.mlx);
 }
 

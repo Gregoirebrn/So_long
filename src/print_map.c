@@ -6,7 +6,7 @@
 /*   By: grebrune <grebrune@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 16:25:00 by grebrune          #+#    #+#             */
-/*   Updated: 2024/01/11 13:53:29 by grebrune         ###   ########.fr       */
+/*   Updated: 2024/01/11 15:36:33 by grebrune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,13 @@ void	xpm_to_img(void *mlx, t_img *img)
 	img->knife = mlx_xpm_file_to_image(mlx, "img/knife.xpm", &width, &height);
 	img->niki = mlx_xpm_file_to_image(mlx, "img/niki.xpm", &width, &height);
 	img->door = mlx_xpm_file_to_image(mlx, "img/door.xpm", &width, &height);
+	img->score = mlx_xpm_file_to_image(mlx, "img/score.xpm", &width, &height);
 }
 
 void	find_img(t_vars *vars, t_img img, char c)
 {
+	if (c == 'S')
+		mlx_put_image_to_window(vars->mlx, vars->win, img.score, 0, 0);
 	if (c == '0')
 		mlx_put_image_to_window(vars->mlx, vars->win, img.empty, img.i, img.x);
 	if (c == '1')
@@ -47,10 +50,10 @@ void	put_sprite(t_vars vars)
 	xpm_to_img(vars.mlx, &img);
 	x = 0;
 	img.x = 0;
+	i = 2;
+	img.i = 120;
 	while (vars.map[x])
 	{
-		i = 0;
-		img.i = 0;
 		while (vars.map[x][i])
 		{
 			find_img(&vars, img, vars.map[x][i]);
@@ -59,5 +62,10 @@ void	put_sprite(t_vars vars)
 		}
 		x++;
 		img.x += 60;
+		i = 0;
+		img.i = 0;
 	}
+	find_img(&vars, img, 'S');
+	mlx_string_put(vars.mlx, vars.win, 4, 25, 0xFFFFFFFF, "MOVES :");
+	mlx_string_put(vars.mlx, vars.win, 50, 25, 0xFFFFFFFF, ft_itoa(vars.move));
 }

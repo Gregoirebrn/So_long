@@ -6,7 +6,7 @@
 /*   By: grebrune <grebrune@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 17:01:49 by grebrune          #+#    #+#             */
-/*   Updated: 2024/01/11 14:00:57 by grebrune         ###   ########.fr       */
+/*   Updated: 2024/01/11 15:02:47 by grebrune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ typedef struct s_vars
 	char	**map;
 	size_t	x;
 	size_t	y;
-	size_t	move;
+	int		move;
 }	t_vars;
 
 typedef struct s_img
@@ -50,8 +50,9 @@ typedef struct s_img
 	void	*niki;
 	void	*empty;
 	void	*knife;
-	int	i;
-	int	x;
+	void	*score;
+	int		i;
+	int		x;
 }	t_img;
 
 char	**map_maker(t_vars *vars);
