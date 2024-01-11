@@ -6,11 +6,11 @@
 /*   By: grebrune <grebrune@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 19:58:30 by grebrune          #+#    #+#             */
-/*   Updated: 2024/01/03 18:02:28 by grebrune         ###   ########.fr       */
+/*   Updated: 2024/01/10 13:58:00 by grebrune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../so_long.h"
 
 int	check_border(char **tab)
 {
@@ -37,7 +37,7 @@ int	check_border(char **tab)
 	return (0);
 }
 
-int check_val(char **tab)
+int	check_val(char **tab)
 {
 	size_t	y;
 	size_t	x;
@@ -86,7 +86,7 @@ int	still_c(char **tab)
 		}
 		x++;
 	}
-	return (0);
+	return (ft_free(tab), 0);
 }
 
 void	find_path(char **tab, size_t x, size_t y)
@@ -101,33 +101,7 @@ void	find_path(char **tab, size_t x, size_t y)
 	}
 }
 
-size_t	tab_len(char **tab)
-{
-	size_t	i;
-
-	i = 0;
-	while (tab[i])
-		i++;
-	return (i);
-}
-
-char	**tab_dup(char **tab)
-{
-	size_t	x;
-	char	**tmp;
-
-	x = 0;
-	tmp = ft_calloc(sizeof(char *), tab_len(tab));
-	while (tab[x])
-	{
-		tmp[x] = ft_strdup(tab[x]);
-		x++;
-	}
-	tmp[x] = NULL;
-	return (tmp);
-}
-
-int	check_path(char **tab)
+int	check_path(char **tab, t_vars *vars)
 {
 	size_t	y;
 	size_t	x;
@@ -141,7 +115,11 @@ int	check_path(char **tab)
 		while (tab[y])
 		{
 			if (tab[x][y] == 'P')
+			{
+				vars->x = x;
+				vars->y = y;
 				find_path(tmp, x, y);
+			}
 			y++;
 		}
 		x++;
