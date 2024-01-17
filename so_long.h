@@ -6,7 +6,7 @@
 /*   By: grebrune <grebrune@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 17:01:49 by grebrune          #+#    #+#             */
-/*   Updated: 2024/01/11 18:46:34 by grebrune         ###   ########.fr       */
+/*   Updated: 2024/01/17 17:50:02 by grebrune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,27 +26,6 @@ typedef struct s_val
 	size_t	y;
 }	t_val;
 
-typedef struct s_data
-{
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-}	t_data;
-
-typedef struct s_vars
-{
-	void	*mlx;
-	void	*win;
-	char	**map;
-	size_t	x;
-	size_t	y;
-	size_t	exit;
-	int		move;
-	t_val	*val;
-}	t_vars;
-
 typedef struct s_img
 {
 	void	*door;
@@ -60,6 +39,18 @@ typedef struct s_img
 	int		x;
 }	t_img;
 
+typedef struct s_vars
+{
+	void	*mlx;
+	void	*win;
+	char	**map;
+	size_t	x;
+	size_t	y;
+	int		move;
+	t_val	*val;
+	t_img	img;
+}	t_vars;
+
 char	**map_maker(t_vars *vars, t_val *val);
 int		check_border(char **tab);
 int		check_val(char **tab, t_val *val);
@@ -69,10 +60,11 @@ int		still_c(char **tab);
 size_t	tab_len(char **tab);
 char	**tab_dup(char **tab);
 
-void	make_window(char **tab, t_vars vars);
+void	make_window(t_vars vars);
 int		close_win(t_vars *vars);
 int		key_hook(int keycode, t_vars *vars);
 void	ft_free(char **tab);
+void	close_img(t_vars *vars);
 void	set_to_zero(t_val *val);
 
 void	put_sprite(t_vars vars);

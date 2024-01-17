@@ -6,7 +6,7 @@
 /*   By: grebrune <grebrune@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 16:25:00 by grebrune          #+#    #+#             */
-/*   Updated: 2024/01/11 16:12:23 by grebrune         ###   ########.fr       */
+/*   Updated: 2024/01/17 17:50:02 by grebrune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,27 +48,30 @@ void	put_sprite(t_vars vars)
 {
 	int		i;
 	int		x;
-	t_img	img;
+	char	*str;
 
-	xpm_to_img(vars.mlx, &img);
+	xpm_to_img(vars.mlx, &vars.img);
 	x = 0;
-	img.x = 0;
+	vars.img.x = 0;
 	i = 2;
-	img.i = 120;
+	vars.img.i = 120;
 	while (vars.map[x])
 	{
 		while (vars.map[x][i])
 		{
-			find_img(&vars, img, vars.map[x][i]);
+			find_img(&vars, vars.img, vars.map[x][i]);
 			i++;
-			img.i += 60;
+			vars.img.i += 60;
 		}
 		x++;
-		img.x += 60;
+		vars.img.x += 60;
 		i = 0;
-		img.i = 0;
+		vars.img.i = 0;
 	}
-	find_img(&vars, img, 'S');
+	find_img(&vars, vars.img, 'S');
 	mlx_string_put(vars.mlx, vars.win, 4, 25, 0xFFFFFFFF, "MOVES :");
-	mlx_string_put(vars.mlx, vars.win, 50, 25, 0xFFFFFFFF, ft_itoa(vars.move));
+	str = ft_itoa(vars.move);
+	mlx_string_put(vars.mlx, vars.win, 50, 25, 0xFFFFFFFF, str);
+	free(str);
+	close_img(&vars);
 }

@@ -6,7 +6,7 @@
 /*   By: grebrune <grebrune@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 17:08:30 by grebrune          #+#    #+#             */
-/*   Updated: 2024/01/17 13:23:13 by grebrune         ###   ########.fr       */
+/*   Updated: 2024/01/17 18:01:23 by grebrune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,18 +31,29 @@ int	key_hook(int keycode, t_vars *vars)
 		player_move(keycode, vars);
 	if (keycode == 65307)
 		close_win(vars);
-	if (vars->map[vars->x][vars->y] == vars->map[vars->val->x][vars->val->y] && vars->val->c_val == 0)
+	if (vars->map[vars->x][vars->y] == vars->map[vars->val->x][vars->val->y] \
+	&& vars->val->c_val == 0)
 		close_win(vars);
 	return (0);
 }
-
+void	close_img(t_vars *vars)
+{
+	mlx_destroy_image(vars->mlx, vars->img.door);
+	mlx_destroy_image(vars->mlx, vars->img.empty);
+	mlx_destroy_image(vars->mlx, vars->img.exit);
+	mlx_destroy_image(vars->mlx, vars->img.niki);
+	mlx_destroy_image(vars->mlx, vars->img.wall);
+	mlx_destroy_image(vars->mlx, vars->img.knife);
+	mlx_destroy_image(vars->mlx, vars->img.score);
+}
 int	close_win(t_vars *vars)
 {
-//	ft_free(vars->map);
 	ft_putnbr_fd((int)vars->move, 1);
-	mlx_loop_end(vars->mlx);
+	ft_free(vars->map);
 	mlx_destroy_window(vars->mlx, vars->win);
-	return (0);
+	mlx_destroy_display(vars->mlx);
+	free(vars->mlx);
+	exit (0);
 }
 
 void	set_to_zero(t_val *val)
