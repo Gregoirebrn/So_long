@@ -6,7 +6,7 @@
 /*   By: grebrune <grebrune@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 16:23:49 by grebrune          #+#    #+#             */
-/*   Updated: 2024/01/11 16:12:23 by grebrune         ###   ########.fr       */
+/*   Updated: 2024/01/17 13:21:52 by grebrune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,11 @@ char	**map_maker(t_vars *vars, t_val *val)
 	tab = ft_split(line, '\n');
 	if (check_border(tab) || check_val(tab, val) || check_path(tab, vars))
 		return (NULL);
+	vars->val = val;
 	return (close(fd), ft_putstr_fd("Good!\n", 1), tab);
 }
 
-void	make_window(char **tab, t_vars vars, t_val val)
+void	make_window(char **tab, t_vars vars)
 {
 	t_data	img;
 
@@ -43,11 +44,8 @@ void	make_window(char **tab, t_vars vars, t_val val)
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, \
 	&img.line_length, &img.endian);
 	put_sprite(vars);
-	printf("----+++---%zu---+++---", val.c_val);
 	mlx_hook(vars.win, 2, 1L << 0, key_hook, &vars);
 	mlx_hook(vars.win, 17, 1L << 0, close_win, &vars);
-	if (vars.map[vars.x][vars.y] == 'F')
-		close_win(&vars);
 	mlx_loop(vars.mlx);
 }
 
@@ -61,6 +59,8 @@ int	main(void)
 	tab = map_maker(&vars, &val);
 	if (!tab)
 		return (1);
-	make_window(tab, vars, val);
+	make_window(tab, vars);
+	if (vars.exit == 1)
+		close_win(&vars);
 	return (ft_free(tab), 0);
 }

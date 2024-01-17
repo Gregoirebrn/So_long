@@ -6,7 +6,7 @@
 /*   By: grebrune <grebrune@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 19:58:30 by grebrune          #+#    #+#             */
-/*   Updated: 2024/01/11 17:31:27 by grebrune         ###   ########.fr       */
+/*   Updated: 2024/01/11 19:18:04 by grebrune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,14 @@ int	check_val(char **tab, t_val *val)
 			if (tab[x][y] == 'P')
 				val->p_val++;
 			else if (tab[x][y] == 'E')
+			{
 				val->e_val++;
+				val->x = x;
+				val->y = y;
+			}
 			else if (tab[x][y] == 'C')
 				val->c_val++;
 			y++;
-			printf("----------%zu----------", val->c_val);
 		}
 		x++;
 	}
@@ -106,11 +109,6 @@ void	find_place(char **tmp, char **tab, t_vars *vars, size_t y, size_t x)
 		vars->x = x;
 		vars->y = y;
 		find_path(tmp, x, y);
-	}
-	if (tab[x][y] == 'E')
-	{
-		vars->x_e = x;
-		vars->y_e = y;
 	}
 }
 
