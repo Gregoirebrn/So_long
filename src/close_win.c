@@ -6,7 +6,7 @@
 /*   By: grebrune <grebrune@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 17:08:30 by grebrune          #+#    #+#             */
-/*   Updated: 2024/01/17 18:01:23 by grebrune         ###   ########.fr       */
+/*   Updated: 2024/01/17 18:01:39 by grebrune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void	close_img(t_vars *vars)
 	mlx_destroy_image(vars->mlx, vars->img.knife);
 	mlx_destroy_image(vars->mlx, vars->img.score);
 }
+
 int	close_win(t_vars *vars)
 {
 	ft_putnbr_fd((int)vars->move, 1);
