@@ -44,6 +44,20 @@ void	find_img(t_vars *vars, t_img img, char c)
 		mlx_put_image_to_window(vars->mlx, vars->win, img.exit, img.i, img.x);
 }
 
+void	put_sprite_utils(t_vars vars, int i, int x)
+{
+	while (vars.map[x][i])
+	{
+		find_img(&vars, vars.img, vars.map[x][i]);
+		i++;
+		vars.img.i += 60;
+	}
+	x++;
+	vars.img.x += 60;
+	i = 0;
+	vars.img.i = 0;
+}
+
 void	put_sprite(t_vars vars)
 {
 	int		i;
@@ -57,20 +71,16 @@ void	put_sprite(t_vars vars)
 	vars.img.i = 120;
 	while (vars.map[x])
 	{
-		while (vars.map[x][i])
-		{
-			find_img(&vars, vars.img, vars.map[x][i]);
-			i++;
-			vars.img.i += 60;
-		}
-		x++;
-		vars.img.x += 60;
-		i = 0;
-		vars.img.i = 0;
+		put_sprite_utils(vars, i, x);
 	}
 	find_img(&vars, vars.img, 'S');
 	mlx_string_put(vars.mlx, vars.win, 4, 25, 0xFFFFFFFF, "MOVES :");
 	str = ft_itoa(vars.move);
+	if (!str)
+	{
+		ft_putstr_fd("Error\nMalloc crash, abort program", 1);
+		close_win(&vars);
+	}
 	mlx_string_put(vars.mlx, vars.win, 50, 25, 0xFFFFFFFF, str);
 	free(str);
 	close_img(&vars);

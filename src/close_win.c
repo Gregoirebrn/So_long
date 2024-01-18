@@ -36,6 +36,7 @@ int	key_hook(int keycode, t_vars *vars)
 		close_win(vars);
 	return (0);
 }
+
 void	close_img(t_vars *vars)
 {
 	mlx_destroy_image(vars->mlx, vars->img.door);

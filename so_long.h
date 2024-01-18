@@ -54,6 +54,7 @@ typedef struct s_vars
 char	**map_maker(t_vars *vars, t_val *val);
 int		check_border(char **tab);
 int		check_val(char **tab, t_val *val);
+void	check_val_utils(char **tab, t_val *val, size_t x, size_t y);
 int		check_path(char **tab, t_vars *vars);
 void	find_path(char **tab, size_t y, size_t x);
 int		still_c(char **tab);

@@ -6,7 +6,7 @@
 /*   By: grebrune <grebrune@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 16:04:31 by grebrune          #+#    #+#             */
-/*   Updated: 2024/01/17 17:55:48 by grebrune         ###   ########.fr       */
+/*   Updated: 2024/01/18 13:07:28 by grebrune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,11 @@ void	map_move(t_vars *vars, int y, int x)
 	{
 		vars->move += 1;
 		vars->map[vars->x][vars->y] = '0';
-		if (vars->map[vars->x][vars->y] == vars->map[vars->val->x][vars->val->y] \
-		&& vars->val->c_val == 0)
+		if (vars->map[vars->x][vars->y] == vars->map[vars->val->x] \
+		[vars->val->y] && vars->val->c_val == 0)
 			vars->map[vars->x][vars->y] = 'F';
-		else if (vars->map[vars->x][vars->y] == vars->map[vars->val->x][vars->val->y])
+		else if (vars->map[vars->x][vars->y] == vars->map[vars->val->x] \
+		[vars->val->y])
 			vars->map[vars->x][vars->y] = 'E';
 		vars->map[vars->x + x][vars->y + y] = 'P';
 		vars->x += x;
@@ -45,4 +46,3 @@ void	player_move(int keycode, t_vars *vars)
 		map_move(vars, 0, 1);
 	put_sprite(*vars);
 }
-

@@ -12,6 +12,7 @@
 
 SRCS		:= 	so_long.c\
 				parsing.c\
+				parsing_utils.c\
 				print_map.c\
 				close_win.c\
 				game_move.c\
