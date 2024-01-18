@@ -6,7 +6,7 @@
 /*   By: grebrune <grebrune@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 17:01:49 by grebrune          #+#    #+#             */
-/*   Updated: 2024/01/17 17:50:02 by grebrune         ###   ########.fr       */
+/*   Updated: 2024/01/18 13:13:44 by grebrune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ typedef struct s_vars
 	t_img	img;
 }	t_vars;
 
-char	**map_maker(t_vars *vars, t_val *val);
+int		map_maker(t_vars *vars, t_val *val);
 int		check_border(char **tab);
 int		check_val(char **tab, t_val *val);
 void	check_val_utils(char **tab, t_val *val, size_t x, size_t y);

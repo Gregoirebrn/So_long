@@ -6,7 +6,7 @@
 /*   By: grebrune <grebrune@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 16:25:00 by grebrune          #+#    #+#             */
-/*   Updated: 2024/01/17 17:50:02 by grebrune         ###   ########.fr       */
+/*   Updated: 2024/01/18 13:42:07 by grebrune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,35 +44,36 @@ void	find_img(t_vars *vars, t_img img, char c)
 		mlx_put_image_to_window(vars->mlx, vars->win, img.exit, img.i, img.x);
 }
 
-void	put_sprite_utils(t_vars vars, int i, int x)
+void	put_sprite_utils(t_vars *vars)
 {
-	while (vars.map[x][i])
+	int		i;
+	int		x;
+
+	i = 2;
+	x = 0;
+	while (vars->map[x])
 	{
-		find_img(&vars, vars.img, vars.map[x][i]);
-		i++;
-		vars.img.i += 60;
+		while (vars->map[x][i])
+		{
+			find_img(vars, vars->img, vars->map[x][i]);
+			i++;
+			vars->img.i += 60;
+		}
+		x++;
+		vars->img.x += 60;
+		i = 0;
+		vars->img.i = 0;
 	}
-	x++;
-	vars.img.x += 60;
-	i = 0;
-	vars.img.i = 0;
 }
 
 void	put_sprite(t_vars vars)
 {
-	int		i;
-	int		x;
 	char	*str;
 
 	xpm_to_img(vars.mlx, &vars.img);
-	x = 0;
 	vars.img.x = 0;
-	i = 2;
 	vars.img.i = 120;
-	while (vars.map[x])
-	{
-		put_sprite_utils(vars, i, x);
-	}
+	put_sprite_utils(&vars);
 	find_img(&vars, vars.img, 'S');
 	mlx_string_put(vars.mlx, vars.win, 4, 25, 0xFFFFFFFF, "MOVES :");
 	str = ft_itoa(vars.move);
