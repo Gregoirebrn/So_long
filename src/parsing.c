@@ -32,8 +32,6 @@ int	check_border(char **tab)
 			return (ft_putstr_fd("Error\n The map is incomplete.\n", 1), 1);
 		x++;
 	}
-	if (x == y)
-		return (ft_putstr_fd("Error\nMap is not a rectangle.\n", 1), 1);
 	return (0);
 }
 
