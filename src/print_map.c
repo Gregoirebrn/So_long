@@ -6,7 +6,7 @@
 /*   By: grebrune <grebrune@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 16:25:00 by grebrune          #+#    #+#             */
-/*   Updated: 2024/01/23 14:57:06 by grebrune         ###   ########.fr       */
+/*   Updated: 2024/01/23 21:39:36 by grebrune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	xpm_to_img(void *mlx, t_img *img)
 	int		height;
 
 	img->empty = mlx_xpm_file_to_image(mlx, "img/empty.xpm", &width, &height);
+	img->monster = mlx_xpm_file_to_image(mlx, "img/opps.xpm", &width, &height);
 	img->wall = mlx_xpm_file_to_image(mlx, "img/wall.xpm", &width, &height);
 	img->knife = mlx_xpm_file_to_image(mlx, "img/knife.xpm", &width, &height);
 	img->niki = mlx_xpm_file_to_image(mlx, "img/niki.xpm", &width, &height);
@@ -30,6 +31,8 @@ void	find_img(t_vars *vars, t_img img, char c)
 {
 	if (c == 'S')
 		mlx_put_image_to_window(vars->mlx, vars->win, img.score, 0, 0);
+	if (c == 'M')
+		mlx_put_image_to_window(vars->mlx, vars->win, img.monster, img.i, img.x);
 	if (c == '0')
 		mlx_put_image_to_window(vars->mlx, vars->win, img.empty, img.i, img.x);
 	if (c == '1')

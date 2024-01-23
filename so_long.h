@@ -31,6 +31,7 @@ typedef struct s_val
 typedef struct s_img
 {
 	void	*door;
+	void	*monster;
 	void	*wall;
 	void	*niki;
 	void	*empty;

@@ -14,6 +14,11 @@
 
 void	map_move(t_vars *vars, int y, int x)
 {
+	if (vars->map[vars->x + x][vars->y + y] == 'M')
+	{
+		ft_putstr_fd("You Died\n", 1);
+		close_win(vars);
+	}
 	if (vars->map[vars->x + x][vars->y + y] == 'C')
 		vars->val->c_val--;
 	if (vars->val->c_val == 0)
