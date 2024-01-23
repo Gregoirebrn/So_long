@@ -38,9 +38,9 @@ int	still_c(char **tab)
 		while (tab[x][y])
 		{
 			if (tab[x][y] == 'C')
-				return (ft_putstr_fd("Error : Issue with collectible.", 1), 1);
+				return (ft_putstr_fd("Error\nIssue with collectible.", 1), 1);
 			if (tab[x][y] == 'E')
-				return (ft_putstr_fd("Error : No valid path find.\n", 1), 1);
+				return (ft_putstr_fd("Error\nNo valid path find.\n", 1), 1);
 			y++;
 		}
 		x++;

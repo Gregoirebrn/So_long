@@ -6,7 +6,7 @@
 /*   By: grebrune <grebrune@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 16:25:00 by grebrune          #+#    #+#             */
-/*   Updated: 2024/01/18 13:42:07 by grebrune         ###   ########.fr       */
+/*   Updated: 2024/01/23 14:57:06 by grebrune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,14 +75,14 @@ void	put_sprite(t_vars vars)
 	vars.img.i = 120;
 	put_sprite_utils(&vars);
 	find_img(&vars, vars.img, 'S');
-	mlx_string_put(vars.mlx, vars.win, 4, 25, 0xFFFFFFFF, "MOVES :");
+	mlx_string_put(vars.mlx, vars.win, 34, 10, 0xFFFFFFFF, "MOVES :");
 	str = ft_itoa(vars.move);
 	if (!str)
 	{
 		ft_putstr_fd("Error\nMalloc crash, abort program", 1);
 		close_win(&vars);
 	}
-	mlx_string_put(vars.mlx, vars.win, 50, 25, 0xFFFFFFFF, str);
+	mlx_string_put(vars.mlx, vars.win, 80, 10, 0xFFFFFFFF, str);
 	free(str);
 	close_img(&vars);
 }

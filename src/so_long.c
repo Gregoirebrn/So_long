@@ -6,23 +6,23 @@
 /*   By: grebrune <grebrune@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 16:23:49 by grebrune          #+#    #+#             */
-/*   Updated: 2024/01/18 13:39:04 by grebrune         ###   ########.fr       */
+/*   Updated: 2024/01/23 15:59:29 by grebrune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
-int	map_maker(t_vars *vars, t_val *val)
+int	map_maker(t_vars *vars, t_val *val, char *file)
 {
 	int		fd;
 	char	line[1024];
 	size_t	i;
 
-	fd = open("map.ber", O_RDONLY);
+	fd = open(file, O_RDONLY);
 	if (fd == -1)
-		return (ft_putstr_fd("Error : Can't open file.", 1), 1);
+		return (ft_putstr_fd("Error\nCan't open file.", 1), 1);
 	if (0 > read(fd, NULL, 0))
-		return (ft_putstr_fd("Error : Can't read file.", 1), 1);
+		return (ft_putstr_fd("Error\nCan't read file.", 1), 1);
 	i = read(fd, line, 1024);
 	line[i] = '\0';
 	vars->map = ft_split(line, '\n');
@@ -30,7 +30,7 @@ int	map_maker(t_vars *vars, t_val *val)
 	check_path(vars->map, vars))
 		return (1);
 	vars->val = val;
-	return (close(fd), ft_putstr_fd("Good!\n", 1), 0);
+	return (close(fd), ft_putstr_fd("Enjoy!\n", 1), 0);
 }
 
 void	make_window(t_vars vars)
@@ -43,14 +43,16 @@ void	make_window(t_vars vars)
 	mlx_loop(vars.mlx);
 }
 
-int	main(void)
+int	main(int ac, char **av)
 {
 	t_vars	vars;
 	t_val	val;
 	int		error;
 
+	if (ac != 2)
+		return (ft_putstr_fd("Error\nYou forgot the map.", 1), 1);
 	ft_bzero(&vars, sizeof(vars));
-	error = map_maker(&vars, &val);
+	error = map_maker(&vars, &val, av[1]);
 	if (error == 1)
 		return (1);
 	make_window(vars);

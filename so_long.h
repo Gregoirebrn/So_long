@@ -51,7 +51,7 @@ typedef struct s_vars
 	t_img	img;
 }	t_vars;
 
-int		map_maker(t_vars *vars, t_val *val);
+int		map_maker(t_vars *vars, t_val *val, char *file);
 int		check_border(char **tab);
 int		check_val(char **tab, t_val *val);
 void	check_val_utils(char **tab, t_val *val, size_t x, size_t y);

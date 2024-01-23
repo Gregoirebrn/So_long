@@ -6,7 +6,7 @@
 /*   By: grebrune <grebrune@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 19:58:30 by grebrune          #+#    #+#             */
-/*   Updated: 2024/01/18 13:15:09 by grebrune         ###   ########.fr       */
+/*   Updated: 2024/01/23 15:55:37 by grebrune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,18 @@ int	check_border(char **tab)
 	while (tab[y])
 	{
 		if (tab[y][0] != '1' || tab[y][x - 1] != '1')
-			return (ft_putstr_fd("Error : the map is incomplete.\n", 1), 1);
+			return (ft_putstr_fd("Error\nThe map is incomplete.\n", 1), 1);
 		y++;
 	}
 	x = 0;
 	while (tab[0][x])
 	{
 		if (tab[0][x] != '1' || tab[y - 1][x] != '1')
-			return (ft_putstr_fd("Error : the map is incomplete.\n", 1), 1);
+			return (ft_putstr_fd("Error\n The map is incomplete.\n", 1), 1);
 		x++;
 	}
 	if (x == y)
-		return (ft_putstr_fd("Error : Map is not a rectangle.\n", 1), 1);
+		return (ft_putstr_fd("Error\nMap is not a rectangle.\n", 1), 1);
 	return (0);
 }
 
@@ -55,7 +55,7 @@ int	check_val(char **tab, t_val *val)
 		x++;
 	}
 	if (val->p_val != 1 || val->e_val != 1 || val->c_val < 1)
-		return (ft_putstr_fd("Error : Missing item in the map.\n", 1), 1);
+		return (ft_putstr_fd("Error\nMissing item in the map.\n", 1), 1);
 	return (0);
 }
 
@@ -92,7 +92,7 @@ int	check_path(char **tab, t_vars *vars)
 	while (tab[x])
 	{
 		y = 0;
-		while (tab[y])
+		while (tab[x][y])
 		{
 			find_place(tmp, vars, y, x);
 			y++;
