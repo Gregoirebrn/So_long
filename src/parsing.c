@@ -54,6 +54,8 @@ int	check_val(char **tab, t_val *val)
 		}
 		x++;
 	}
+	val->wy = (int)y;
+	val->wx = (int)x;
 	if (val->p_val != 1 || val->e_val != 1 || val->c_val < 1)
 		return (ft_putstr_fd("Error\nMissing item in the map.\n", 1), 1);
 	return (0);

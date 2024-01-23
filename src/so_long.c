@@ -6,7 +6,7 @@
 /*   By: grebrune <grebrune@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 16:23:49 by grebrune          #+#    #+#             */
-/*   Updated: 2024/01/23 15:59:29 by grebrune         ###   ########.fr       */
+/*   Updated: 2024/01/23 16:55:03 by grebrune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ int	map_maker(t_vars *vars, t_val *val, char *file)
 	if (0 > read(fd, NULL, 0))
 		return (ft_putstr_fd("Error\nCan't read file.", 1), 1);
 	i = read(fd, line, 1024);
+	if (i == 0)
+		return (ft_putstr_fd("Error\nThe file is empty.", 1), 1);
 	line[i] = '\0';
 	vars->map = ft_split(line, '\n');
 	if (check_border(vars->map) || check_val(vars->map, val) || \
@@ -33,10 +35,16 @@ int	map_maker(t_vars *vars, t_val *val, char *file)
 	return (close(fd), ft_putstr_fd("Enjoy!\n", 1), 0);
 }
 
-void	make_window(t_vars vars)
+void	make_window(t_vars vars, t_val val)
 {
 	vars.mlx = mlx_init();
-	vars.win = mlx_new_window(vars.mlx, 780, 300, "So_long");
+	if (vars.mlx == NULL)
+	{
+		ft_putstr_fd("Error\nThe mlx has crash.", 1);
+		ft_free(vars.map);
+		return ;
+	}
+	vars.win = mlx_new_window(vars.mlx, 60 * val.wy, 60 * val.wx, "So_long");
 	put_sprite(vars);
 	mlx_hook(vars.win, 2, 1L << 0, key_hook, &vars);
 	mlx_hook(vars.win, 17, 1L << 0, close_win, &vars);
@@ -55,6 +63,6 @@ int	main(int ac, char **av)
 	error = map_maker(&vars, &val, av[1]);
 	if (error == 1)
 		return (1);
-	make_window(vars);
+	make_window(vars, val);
 	return (0);
 }

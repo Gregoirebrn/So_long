@@ -6,7 +6,7 @@
 /*   By: grebrune <grebrune@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 17:08:30 by grebrune          #+#    #+#             */
-/*   Updated: 2024/01/17 18:01:39 by grebrune         ###   ########.fr       */
+/*   Updated: 2024/01/23 16:08:09 by grebrune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void	close_img(t_vars *vars)
 
 int	close_win(t_vars *vars)
 {
+	ft_putstr_fd("Total moves in game : ", 1);
 	ft_putnbr_fd((int)vars->move, 1);
 	ft_free(vars->map);
 	mlx_destroy_window(vars->mlx, vars->win);

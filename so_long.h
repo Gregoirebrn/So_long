@@ -20,6 +20,8 @@
 typedef struct s_val
 {
 	size_t	p_val;
+	int		wy;
+	int		wx;
 	size_t	e_val;
 	size_t	c_val;
 	size_t	x;
@@ -61,7 +63,7 @@ int		still_c(char **tab);
 size_t	tab_len(char **tab);
 char	**tab_dup(char **tab);
 
-void	make_window(t_vars vars);
+void	make_window(t_vars vars, t_val val);
 int		close_win(t_vars *vars);
 int		key_hook(int keycode, t_vars *vars);
 void	ft_free(char **tab);
