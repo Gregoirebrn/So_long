@@ -53,19 +53,20 @@ typedef struct s_vars
 	t_img	img;
 }	t_vars;
 
-int		map_maker(t_vars *vars, t_val *val, char *file);
 int		check_border(char **tab);
 int		check_val(char **tab, t_val *val);
 void	check_val_utils(char **tab, t_val *val, size_t x, size_t y);
 int		check_path(char **tab, t_vars *vars);
+int		check_ber(char *str);
 void	find_path(char **tab, size_t y, size_t x);
 int		still_c(char **tab);
+
+int		map_maker(t_vars *vars, t_val *val, char *file);
 size_t	tab_len(char **tab);
 char	**tab_dup(char **tab);
 
 void	make_window(t_vars vars, t_val val);
 int		close_win(t_vars *vars);
-int		key_hook(int keycode, t_vars *vars);
 void	ft_free(char **tab);
 void	close_img(t_vars *vars);
 void	set_to_zero(t_val *val);
@@ -75,6 +76,7 @@ void	end_game(t_vars vars, t_val val);
 void	xpm_to_img(void *mlx, t_img *img);
 void	find_img(t_vars *vars, t_img img, char c);
 
+int		key_hook(int keycode, t_vars *vars);
 void	player_move(int keycode, t_vars *vars);
 void	map_move(t_vars *vars, int y, int x);
 

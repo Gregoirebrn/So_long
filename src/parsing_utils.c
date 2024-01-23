@@ -6,7 +6,7 @@
 /*   By: grebrune <grebrune@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 13:09:13 by grebrune          #+#    #+#             */
-/*   Updated: 2024/01/18 13:09:13 by grebrune         ###   ########.fr       */
+/*   Updated: 2024/01/23 17:28:35 by grebrune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,19 @@ int	still_c(char **tab)
 		x++;
 	}
 	return (ft_free(tab), 0);
+}
+
+int	check_ber(char *str)
+{
+	size_t	i;
+
+	i = 0;
+	while (str && str[i])
+		i++;
+	if (i < 4)
+		return (1);
+	if (str[i - 1] == 'r' && str[i - 2] == 'e' && \
+	str[i - 3] == 'b' && str[i - 4] == '.')
+		return (0);
+	return (1);
 }

@@ -18,6 +18,8 @@ int	map_maker(t_vars *vars, t_val *val, char *file)
 	char	line[1024];
 	size_t	i;
 
+	if (check_ber(file) == 1)
+		return (ft_putstr_fd("Error\nThe file is not an .ber.", 1), 1);
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
 		return (ft_putstr_fd("Error\nCan't open file.", 1), 1);
