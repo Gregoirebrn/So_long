@@ -6,12 +6,20 @@
 #    By: grebrune <grebrune@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/07 16:45:45 by grebrune          #+#    #+#              #
-#    Updated: 2024/01/09 19:25:35 by grebrune         ###   ########.fr        #
+#    Updated: 2024/01/24 17:01:08 by grebrune         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS		:= 	so_long.c\
+SRCS		:=	so_long.c\
 				parsing.c\
+				parsing_utils.c\
+				print_map.c\
+				close_win.c\
+				game_move.c\
+				tab_creator.c\
+
+SRCS_B		:=	so_long.c\
+				parsing_bonus.c\
 				parsing_utils.c\
 				print_map.c\
 				close_win.c\
@@ -22,19 +30,30 @@ SRCS_D		:=	src/
 
 OBJS_D		:=	objs/
 
+OBJS_B_D	:=	objs_b/
+
 OBJS		:=	$(SRCS:%.c=$(OBJS_D)%.o)
+
+OBJS_B		:=	$(SRCS_B:%.c=$(OBJS_B_D)%.o)
 
 HEAD		:=	so_long.h
 
 HEAD_D		:=	.
 
-CFLAGS		:=	-Wall -Wextra #-Werror
+CFLAGS		:=	-Wall -Wextra -Werror
 
 AR			:=	ar rcs
 
 NAME		:=	so_long
 
+NAME_B		:=	so_long_bonus
+
 all			:	$(NAME)
+
+bonus		:	$(NAME_B)
+
+$(NAME_B)	:	$(OBJS_B_D) $(OBJS_B) libft mlx Makefile
+				$(CC) $(OBJS_B) -Llibftbis -lft -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o $(NAME_B)
 
 $(NAME)		:	$(OBJS_D) $(OBJS) libft mlx Makefile
 				$(CC) $(OBJS) -Llibftbis -lft -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o $(NAME)
@@ -42,8 +61,14 @@ $(NAME)		:	$(OBJS_D) $(OBJS) libft mlx Makefile
 $(OBJS)		:	$(OBJS_D)%.o: $(SRCS_D)%.c $(HEAD)
 				$(CC) $(CFLAGS) -I/usr/include -Imlx_linux -Ilibftbis -I$(HEAD_D) -c $< -o $@
 
+$(OBJS_B)	:	$(OBJS_B_D)%.o: $(SRCS_D)%.c $(HEAD)
+				$(CC) $(CFLAGS) -I/usr/include -Imlx_linux -Ilibftbis -I$(HEAD_D) -c $< -o $@
+
 $(OBJS_D)	:
 				@mkdir -p $(OBJS_D)
+
+$(OBJS_B_D)	:
+				@mkdir -p $(OBJS_B_D)
 
 mlx			:
 				make -C mlx_linux
@@ -52,10 +77,10 @@ libft		:
 				make -C libftbis
 
 clean		:
-				$(RM) -r $(OBJS) $(OBJS_D) $(OBJS_B)
+				$(RM) -r $(OBJS) $(OBJS_D) $(OBJS_B) $(OBJS_B_D)
 
 fclean		:	clean
-				$(RM) $(NAME)
+				$(RM) $(NAME) $(NAME_B)
 
 re			:	fclean all
 

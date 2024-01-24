@@ -6,7 +6,7 @@
 /*   By: grebrune <grebrune@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 17:08:30 by grebrune          #+#    #+#             */
-/*   Updated: 2024/01/23 16:08:09 by grebrune         ###   ########.fr       */
+/*   Updated: 2024/01/24 15:24:46 by grebrune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,17 @@ int	key_hook(int keycode, t_vars *vars)
 		close_win(vars);
 	if (vars->map[vars->x][vars->y] == vars->map[vars->val->x][vars->val->y] \
 	&& vars->val->c_val == 0)
+	{
+		ft_putstr_fd("You Win!\n", 1);
 		close_win(vars);
+	}
 	return (0);
 }
 
 void	close_img(t_vars *vars)
 {
 	mlx_destroy_image(vars->mlx, vars->img.door);
+	mlx_destroy_image(vars->mlx, vars->img.monster);
 	mlx_destroy_image(vars->mlx, vars->img.empty);
 	mlx_destroy_image(vars->mlx, vars->img.exit);
 	mlx_destroy_image(vars->mlx, vars->img.niki);

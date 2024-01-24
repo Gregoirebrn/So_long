@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   parsing_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: grebrune <grebrune@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/12 19:58:30 by grebrune          #+#    #+#             */
-/*   Updated: 2024/01/24 16:40:37 by grebrune         ###   ########.fr       */
+/*   Created: 2024/01/24 16:32:30 by grebrune          #+#    #+#             */
+/*   Updated: 2024/01/24 16:38:18 by grebrune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	check_val(char **tab, t_val *val)
 
 void	find_path(char **tab, size_t x, size_t y)
 {
-	if (tab[x][y] != '1' && tab[x][y] != 'A')
+	if (tab[x][y] != '1' && tab[x][y] != 'A' && tab[x][y] != 'M')
 	{
 		tab[x][y] = 'A';
 		find_path(tab, x - 1, y);
@@ -94,7 +94,7 @@ int	check_path(char **tab, t_vars *vars)
 		y = 0;
 		while (tab[x][y])
 		{
-			if (tab[x][y] != '0' && tab[x][y] != '1' && \
+			if (tab[x][y] != '0' && tab[x][y] != '1' && tab[x][y] != 'M' && \
 			tab[x][y] != 'C' && tab[x][y] != 'E' && tab[x][y] != 'P')
 				return (ft_putstr_fd("Error\nWrong item in the map.\n", 1), 1);
 			find_place(tmp, vars, y, x);

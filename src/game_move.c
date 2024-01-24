@@ -6,7 +6,7 @@
 /*   By: grebrune <grebrune@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 16:04:31 by grebrune          #+#    #+#             */
-/*   Updated: 2024/01/18 13:07:28 by grebrune         ###   ########.fr       */
+/*   Updated: 2024/01/24 16:08:50 by grebrune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	map_move(t_vars *vars, int y, int x)
 {
 	if (vars->map[vars->x + x][vars->y + y] == 'M')
 	{
-		ft_putstr_fd("You Died\n", 1);
+		ft_putstr_fd("You Died!\n", 1);
 		close_win(vars);
 	}
 	if (vars->map[vars->x + x][vars->y + y] == 'C')
@@ -26,6 +26,8 @@ void	map_move(t_vars *vars, int y, int x)
 	if (vars->map[vars->x + x][vars->y + y] != '1')
 	{
 		vars->move += 1;
+		ft_putnbr_fd((int)vars->move, 1);
+		ft_putstr_fd(" moves.\n", 1);
 		vars->map[vars->x][vars->y] = '0';
 		if (vars->map[vars->x][vars->y] == vars->map[vars->val->x] \
 		[vars->val->y] && vars->val->c_val == 0)

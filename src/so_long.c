@@ -6,7 +6,7 @@
 /*   By: grebrune <grebrune@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 16:23:49 by grebrune          #+#    #+#             */
-/*   Updated: 2024/01/23 16:55:03 by grebrune         ###   ########.fr       */
+/*   Updated: 2024/01/24 16:04:25 by grebrune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ int	map_maker(t_vars *vars, t_val *val, char *file)
 	i = read(fd, line, 1024);
 	if (i == 0)
 		return (ft_putstr_fd("Error\nThe file is empty.", 1), 1);
+	if (read(fd, line, 1024) > 0)
+		return (ft_putstr_fd("Error\nThe map is too big.", 1), 1);
 	line[i] = '\0';
 	vars->map = ft_split(line, '\n');
 	if (check_border(vars->map) || check_val(vars->map, val) || \
