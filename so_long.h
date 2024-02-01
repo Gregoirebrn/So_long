@@ -74,7 +74,7 @@ void	set_to_zero(t_val *val);
 
 void	put_sprite(t_vars vars);
 void	end_game(t_vars vars, t_val val);
-void	xpm_to_img(void *mlx, t_img *img);
+void	xpm_to_img(void *mlx, t_vars *vars);
 void	find_img(t_vars *vars, t_img img, char c);
 
 int		key_hook(int keycode, t_vars *vars);

@@ -6,25 +6,28 @@
 /*   By: grebrune <grebrune@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 16:25:00 by grebrune          #+#    #+#             */
-/*   Updated: 2024/01/23 21:39:36 by grebrune         ###   ########.fr       */
+/*   Updated: 2024/02/01 21:48:07 by grebrune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
-void	xpm_to_img(void *mlx, t_img *img)
+void	xpm_to_img(void *mlx, t_vars *vars)
 {
 	int		width;
 	int		height;
 
-	img->empty = mlx_xpm_file_to_image(mlx, "img/empty.xpm", &width, &height);
-	img->monster = mlx_xpm_file_to_image(mlx, "img/opps.xpm", &width, &height);
-	img->wall = mlx_xpm_file_to_image(mlx, "img/wall.xpm", &width, &height);
-	img->knife = mlx_xpm_file_to_image(mlx, "img/knife.xpm", &width, &height);
-	img->niki = mlx_xpm_file_to_image(mlx, "img/niki.xpm", &width, &height);
-	img->door = mlx_xpm_file_to_image(mlx, "img/door.xpm", &width, &height);
-	img->score = mlx_xpm_file_to_image(mlx, "img/score.xpm", &width, &height);
-	img->exit = mlx_xpm_file_to_image(mlx, "img/exit.xpm", &width, &height);
+	vars->img.empty = mlx_xpm_file_to_image(mlx, "img/empty.xpm", &width, &height);
+	vars->img.monster = mlx_xpm_file_to_image(mlx, "img/opps.xpm", &width, &height);
+	vars->img.wall = mlx_xpm_file_to_image(mlx, "img/wall.xpm", &width, &height);
+	vars->img.knife = mlx_xpm_file_to_image(mlx, "img/knife.xpm", &width, &height);
+	vars->img.niki = mlx_xpm_file_to_image(mlx, "img/niki.xpm", &width, &height);
+	vars->img.door = mlx_xpm_file_to_image(mlx, "img/door.xpm", &width, &height);
+	vars->img.score = mlx_xpm_file_to_image(mlx, "img/score.xpm", &width, &height);
+	vars->img.exit = mlx_xpm_file_to_image(mlx, "img/exit.xpm", &width, &height);
+	if (!img->empty || !img->monster || !img->wall || !img->knife || !img->niki \
+	|| !img->door || !img->score || !img->exit)
+		close_win(vars);
 }
 
 void	find_img(t_vars *vars, t_img img, char c)
@@ -73,7 +76,7 @@ void	put_sprite(t_vars vars)
 {
 	char	*str;
 
-	xpm_to_img(vars.mlx, &vars.img);
+	xpm_to_img(vars.mlx, &vars);
 	vars.img.x = 0;
 	vars.img.i = 120;
 	put_sprite_utils(&vars);
