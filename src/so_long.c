@@ -6,7 +6,7 @@
 /*   By: grebrune <grebrune@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 16:23:49 by grebrune          #+#    #+#             */
-/*   Updated: 2024/01/24 16:04:25 by grebrune         ###   ########.fr       */
+/*   Updated: 2024/02/02 15:54:04 by grebrune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	map_maker(t_vars *vars, t_val *val, char *file)
 {
 	int		fd;
-	char	line[1024];
+	char	line[594];
 	size_t	i;
 
 	if (check_ber(file) == 1)
@@ -25,10 +25,11 @@ int	map_maker(t_vars *vars, t_val *val, char *file)
 		return (ft_putstr_fd("Error\nCan't open file.", 1), 1);
 	if (0 > read(fd, NULL, 0))
 		return (ft_putstr_fd("Error\nCan't read file.", 1), 1);
-	i = read(fd, line, 1024);
+	i = read(fd, line, 594);
+	printf("%s", line);
 	if (i == 0)
 		return (ft_putstr_fd("Error\nThe file is empty.", 1), 1);
-	if (read(fd, line, 1024) > 0)
+	if (read(fd, line, 1) > 0)
 		return (ft_putstr_fd("Error\nThe map is too big.", 1), 1);
 	line[i] = '\0';
 	vars->map = ft_split(line, '\n');

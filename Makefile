@@ -6,7 +6,7 @@
 #    By: grebrune <grebrune@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/07 16:45:45 by grebrune          #+#    #+#              #
-#    Updated: 2024/02/02 01:23:17 by grebrune         ###   ########.fr        #
+#    Updated: 2024/02/02 15:22:42 by grebrune         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,7 +44,7 @@ HEAD		:=	so_long.h
 
 HEAD_D		:=	.
 
-CFLAGS		:=	-Wall -Wextra -Werror
+CFLAGS		:=	-Wall -Wextra -Werror -g3
 
 NAME		:=	so_long
 
@@ -84,8 +84,8 @@ bonus		:	lib
 				$(MAKE) $(NAME_B)
 
 lib			:
-			$(MAKE) -C $(LIB_D)
-			$(MAKE) -C $(MLX_D)
+				$(MAKE) -C $(LIB_D)
+				$(MAKE) -C $(MLX_D)
 
 $(NAME)		:	$(OBJS_D) $(OBJS) $(LIB_A) $(MLX_A) $(HEAD)
 				$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(MLX_A) $(LIB_A) $(MLX_F)
