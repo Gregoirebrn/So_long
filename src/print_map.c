@@ -25,8 +25,8 @@ void	xpm_to_img(void *mlx, t_vars *vars)
 	vars->img.door = mlx_xpm_file_to_image(mlx, "img/door.xpm", &width, &height);
 	vars->img.score = mlx_xpm_file_to_image(mlx, "img/score.xpm", &width, &height);
 	vars->img.exit = mlx_xpm_file_to_image(mlx, "img/exit.xpm", &width, &height);
-	if (!img->empty || !img->monster || !img->wall || !img->knife || !img->niki \
-	|| !img->door || !img->score || !img->exit)
+	if (!vars->img.empty || !vars->img.monster || !vars->img.wall || !vars->img.knife || !vars->img.niki \
+	|| !vars->img.door || !vars->img.score || !vars->img.exit)
 		close_win(vars);
 }
 

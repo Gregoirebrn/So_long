@@ -44,20 +44,20 @@ void	close_img(t_vars *vars)
 {
 	if (vars->img.door)
 		mlx_destroy_image(vars->mlx, vars->img.door);
-	if (vars->img.door)
+	if (vars->img.monster)
 		mlx_destroy_image(vars->mlx, vars->img.monster);
-	if (vars->img.door)
-		mlx_destroy_image(vars->mlx, vars->img.empty);
-	if (vars->img.door)
-		mlx_destroy_image(vars->mlx, vars->img.exit);
-	if (vars->img.door)
-		mlx_destroy_image(vars->mlx, vars->img.niki);
-	if (vars->img.door)
-		mlx_destroy_image(vars->mlx, vars->img.wall);
-	if (vars->img.door)
-		mlx_destroy_image(vars->mlx, vars->img.knife);
-	if (vars->img.door)
+	if (vars->img.score)
 		mlx_destroy_image(vars->mlx, vars->img.score);
+	if (vars->img.knife)
+		mlx_destroy_image(vars->mlx, vars->img.knife);
+	if (vars->img.wall)
+		mlx_destroy_image(vars->mlx, vars->img.wall);
+	if (vars->img.exit)
+		mlx_destroy_image(vars->mlx, vars->img.exit);
+	if (vars->img.niki)
+		mlx_destroy_image(vars->mlx, vars->img.niki);
+	if (vars->img.empty)
+		mlx_destroy_image(vars->mlx, vars->img.empty);
 }
 
 int	close_win(t_vars *vars)
