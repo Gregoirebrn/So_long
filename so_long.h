@@ -17,6 +17,15 @@
 # include "mlx_linux/mlx.h"
 # include <stdio.h>
 
+
+typedef struct s_anime
+{
+	void	*frame_1;
+	void	*frame_2;
+	void	*frame_3;
+	void	*frame_4;
+}	t_anime;
+
 typedef struct s_val
 {
 	size_t	p_val;
