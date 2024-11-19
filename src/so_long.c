@@ -26,7 +26,6 @@ int	map_maker(t_vars *vars, t_val *val, char *file)
 	if (0 > read(fd, NULL, 0))
 		return (ft_putstr_fd("Error\nCan't read file.", 1), 1);
 	i = read(fd, line, 594);
-	printf("%s", line);
 	if (i == 0)
 		return (ft_putstr_fd("Error\nThe file is empty.", 1), 1);
 	if (read(fd, line, 1) > 0)
@@ -42,6 +41,10 @@ int	map_maker(t_vars *vars, t_val *val, char *file)
 
 void	make_window(t_vars vars, t_val val)
 {
+//	SDL_Init(SDL_INIT_VIDEO);
+//
+//	Uint32 frame_delay = 1000 / FRAME_RATE;
+//	Uint32 frame_start, frame_time;
 	vars.mlx = mlx_init();
 	if (vars.mlx == NULL)
 	{
@@ -50,9 +53,9 @@ void	make_window(t_vars vars, t_val val)
 		return ;
 	}
 	vars.win = mlx_new_window(vars.mlx, 60 * val.wy, 60 * val.wx, "So_long");
-	put_sprite(vars);
 	mlx_hook(vars.win, 2, 1L << 0, key_hook, &vars);
 	mlx_hook(vars.win, 17, 1L << 0, close_win, &vars);
+	mlx_loop_hook(vars.mlx, put_sprite, (void *)&vars);
 	mlx_loop(vars.mlx);
 }
 

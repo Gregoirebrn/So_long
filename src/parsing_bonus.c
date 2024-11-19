@@ -102,5 +102,5 @@ int	check_path(char **tab, t_vars *vars)
 		}
 		x++;
 	}
-	return (still_c(tmp));
+	return (vars->bonus = true, still_c(tmp));
 }

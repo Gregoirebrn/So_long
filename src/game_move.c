@@ -26,8 +26,11 @@ void	map_move(t_vars *vars, int y, int x)
 	if (vars->map[vars->x + x][vars->y + y] != '1')
 	{
 		vars->move += 1;
-		ft_putnbr_fd((int)vars->move, 1);
-		ft_putstr_fd(" moves.\n", 1);
+		if (!vars->bonus)
+		{
+			ft_putnbr_fd((int)vars->move, 1);
+			ft_putstr_fd(" moves.\n", 1);
+		}
 		vars->map[vars->x][vars->y] = '0';
 		if (vars->map[vars->x][vars->y] == vars->map[vars->val->x] \
 		[vars->val->y] && vars->val->c_val == 0)
@@ -51,5 +54,5 @@ void	player_move(int keycode, t_vars *vars)
 		map_move(vars, +1, 0);
 	if (keycode == 's')
 		map_move(vars, 0, 1);
-	put_sprite(*vars);
+	put_sprite(vars);
 }

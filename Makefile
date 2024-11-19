@@ -44,7 +44,7 @@ HEAD		:=	so_long.h
 
 HEAD_D		:=	.
 
-CFLAGS		:=	-Wall -Wextra -Werror -g3
+CFLAGS		:=	-Wall -Wextra -Werror -ofast -g3
 
 NAME		:=	so_long
 
@@ -73,6 +73,14 @@ MLX_H		:=	$(MLX_D)mlx.h
 
 MLX_A		:=	$(addprefix $(MLX_D), $(MLX))
 
+PRI			:=	libftprintf.a
+
+PRI_D		:=	ft_printf/
+
+PRI_H		:=	$(PRI_D)ft_printf.h
+
+PRI_A		:=	$(addprefix $(PRI_D), $(PRI))
+
 ########################################################################################################################
 #                                                        RULES                                                         #
 ########################################################################################################################
@@ -86,11 +94,12 @@ bonus		:	lib
 lib			:
 				$(MAKE) -C $(LIB_D)
 				$(MAKE) -C $(MLX_D)
+				$(MAKE) -C $(PRI_D)
 
-$(NAME)		:	$(OBJS_D) $(OBJS) $(LIB_A) $(MLX_A) $(HEAD)
-				$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(MLX_A) $(LIB_A) $(MLX_F)
+$(NAME)		:	$(OBJS_D) $(OBJS) $(LIB_A) $(MLX_A) $(PRI_A) $(HEAD)
+				$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(MLX_A) $(LIB_A) $(PRI_A) $(MLX_F)
 
-$(OBJS)		:	$(OBJS_D)%.o: $(SRCS_D)%.c $(HEAD) $(MLX_H) $(LIB_H)
+$(OBJS)		:	$(OBJS_D)%.o: $(SRCS_D)%.c $(HEAD) $(MLX_H) $(LIB_H) $(PRI_H)
 				$(CC) $(CFLAGS) -I/usr/include -Ilibftbis -Imlx_linux -c $< -o $@
 
 $(OBJS_D)	:
@@ -101,10 +110,10 @@ $(OBJS_D)	:
 #                                                        BONUS                                                         #
 ########################################################################################################################
 
-$(NAME_B)	:	 $(OBJS_B_D) $(OBJS_B) $(LIB_A) $(MLX_A) $(HEAD)
-				$(CC) $(CFLAGS) -o $(NAME_B) $(OBJS_B) $(MLX_A) $(LIB_A) $(MLX_F)
+$(NAME_B)	:	 $(OBJS_B_D) $(OBJS_B) $(LIB_A) $(MLX_A) $(PRI_A) $(HEAD)
+				$(CC) $(CFLAGS) -o $(NAME_B) $(OBJS_B) $(MLX_A) $(LIB_A) $(MLX_F) $(PRI_A)
 
-$(OBJS_B)	:	$(OBJS_B_D)%.o: $(SRCS_D)%.c $(HEAD) $(LIB_H) $(MLX_H)
+$(OBJS_B)	:	$(OBJS_B_D)%.o: $(SRCS_D)%.c $(HEAD) $(LIB_H) $(MLX_H) $(PRI_H)
 				$(CC) $(CFLAGS) -I/usr/include -Ilibftbis -Imlx_linux -c $< -o $@
 
 $(OBJS_B_D)	:
@@ -118,10 +127,12 @@ clean		:
 				$(RM) -r $(OBJS) $(OBJS_D) $(OBJS_B) $(OBJS_B_D)
 				$(MAKE) clean -C libftbis
 				$(MAKE) clean -C mlx_linux
+				$(MAKE) clean -C ft_printf
 
 fclean		:	clean
 				$(RM) $(NAME) $(NAME_B)
 				$(MAKE) fclean -C libftbis
+				$(MAKE) fclean -C ft_printf
 				$(MAKE) clean -C mlx_linux
 
 re			:	fclean all

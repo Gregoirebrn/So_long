@@ -42,28 +42,67 @@ int	key_hook(int keycode, t_vars *vars)
 
 void	close_img(t_vars *vars)
 {
+	if (vars->img.skull_0)
+		mlx_destroy_image(vars->mlx, vars->img.skull_0);
+	if (vars->img.skull_1)
+		mlx_destroy_image(vars->mlx, vars->img.skull_1);
+	if (vars->img.skull_2)
+		mlx_destroy_image(vars->mlx, vars->img.skull_2);
+	if (vars->img.skull_3)
+		mlx_destroy_image(vars->mlx, vars->img.skull_3);
+	if (vars->img.skull_4)
+		mlx_destroy_image(vars->mlx, vars->img.skull_4);
+	if (vars->img.skull_5)
+		mlx_destroy_image(vars->mlx, vars->img.skull_5);
+	if (vars->img.skull_6)
+		mlx_destroy_image(vars->mlx, vars->img.skull_6);
+	if (vars->img.skull_7)
+		mlx_destroy_image(vars->mlx, vars->img.skull_7);
+
 	if (vars->img.door)
 		mlx_destroy_image(vars->mlx, vars->img.door);
-	if (vars->img.monster)
-		mlx_destroy_image(vars->mlx, vars->img.monster);
+	if (vars->img.monster_1)
+		mlx_destroy_image(vars->mlx, vars->img.monster_1);
+	if (vars->img.monster_2)
+		mlx_destroy_image(vars->mlx, vars->img.monster_2);
+	if (vars->img.monster_3)
+		mlx_destroy_image(vars->mlx, vars->img.monster_3);
 	if (vars->img.score)
 		mlx_destroy_image(vars->mlx, vars->img.score);
-	if (vars->img.knife)
-		mlx_destroy_image(vars->mlx, vars->img.knife);
 	if (vars->img.wall)
 		mlx_destroy_image(vars->mlx, vars->img.wall);
 	if (vars->img.exit)
 		mlx_destroy_image(vars->mlx, vars->img.exit);
-	if (vars->img.niki)
-		mlx_destroy_image(vars->mlx, vars->img.niki);
+	if (vars->img.player_0)
+		mlx_destroy_image(vars->mlx, vars->img.player_0);
+	if (vars->img.player_1)
+		mlx_destroy_image(vars->mlx, vars->img.player_1);
+	if (vars->img.player_2)
+		mlx_destroy_image(vars->mlx, vars->img.player_2);
 	if (vars->img.empty)
 		mlx_destroy_image(vars->mlx, vars->img.empty);
 }
 
+void mlx_string_put_scaled(void *mlx, void *win, int x, int y,
+						   int color, char *string, int scale)
+{
+	if (scale <= 0)
+		scale = 1;
+
+	for (int i = 0; i < scale; i++)
+	{
+		for (int j = 0; j < scale; j++)
+		{
+			int new_x = x + i;
+			int new_y = y + j;
+			mlx_string_put(mlx, win, new_x, new_y, color, string);
+		}
+	}
+}
+
 int	close_win(t_vars *vars)
 {
-	ft_putstr_fd("Total moves in game : ", 1);
-	ft_putnbr_fd((int)vars->move, 1);
+	ft_printf("Total moves in game : %d\n", (int)vars->move);
 	ft_free(vars->map);
 	mlx_destroy_window(vars->mlx, vars->win);
 	mlx_destroy_display(vars->mlx);
