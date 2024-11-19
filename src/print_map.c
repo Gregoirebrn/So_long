@@ -17,6 +17,11 @@ void	xpm_to_img(void *mlx, t_vars *vars)
 	int		width;
 	int		height;
 
+	vars->ani.frame_1 = mlx_xpm_file_to_image(mlx, "img/frame_0.xpm", &width, &height);
+	vars->ani.frame_2 = mlx_xpm_file_to_image(mlx, "img/frame_1.xpm", &width, &height);
+	vars->ani.frame_3 = mlx_xpm_file_to_image(mlx, "img/frame_2.xpm", &width, &height);
+	vars->ani.frame_4 = mlx_xpm_file_to_image(mlx, "img/frame_3.xpm", &width, &height);
+
 	vars->img.empty = mlx_xpm_file_to_image(mlx, "img/empty.xpm", &width, &height);
 	vars->img.monster = mlx_xpm_file_to_image(mlx, "img/opps.xpm", &width, &height);
 	vars->img.wall = mlx_xpm_file_to_image(mlx, "img/wall.xpm", &width, &height);
@@ -32,6 +37,8 @@ void	xpm_to_img(void *mlx, t_vars *vars)
 
 void	find_img(t_vars *vars, t_img img, char c)
 {
+	static int count_ani = 0;
+
 	if (c == 'S')
 		mlx_put_image_to_window(vars->mlx, vars->win, img.score, 0, 0);
 	if (c == 'M')
@@ -42,8 +49,22 @@ void	find_img(t_vars *vars, t_img img, char c)
 		mlx_put_image_to_window(vars->mlx, vars->win, img.wall, img.i, img.x);
 	if (c == 'C')
 		mlx_put_image_to_window(vars->mlx, vars->win, img.knife, img.i, img.x);
-	if (c == 'P')
-		mlx_put_image_to_window(vars->mlx, vars->win, img.niki, img.i, img.x);
+	if (c == 'P') {
+		if (count_ani == 0)
+			mlx_put_image_to_window(vars->mlx, vars->win, vars->ani.frame_1, img.i, img.x);
+
+		if (count_ani == 1)
+			mlx_put_image_to_window(vars->mlx, vars->win, vars->ani.frame_2, img.i, img.x);
+
+		if (count_ani == 2)
+			mlx_put_image_to_window(vars->mlx, vars->win, vars->ani.frame_3, img.i, img.x);
+
+		if (count_ani == 3)
+			mlx_put_image_to_window(vars->mlx, vars->win, vars->ani.frame_4, img.i, img.x);
+		count_ani++;
+		if (count_ani > 3)
+			count_ani = 0;
+	}
 	if (c == 'E')
 		mlx_put_image_to_window(vars->mlx, vars->win, img.door, img.i, img.x);
 	if (c == 'F')

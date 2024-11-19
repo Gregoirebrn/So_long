@@ -61,6 +61,7 @@ typedef struct s_vars
 	int		move;
 	t_val	*val;
 	t_img	img;
+	t_anime	ani;
 }	t_vars;
 
 int		check_border(char **tab);
