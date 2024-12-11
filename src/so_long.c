@@ -36,12 +36,13 @@ int	map_maker(t_vars *vars, t_val *val, char *file)
 	check_path(vars->map, vars))
 		return (1);
 	vars->val = val;
-	return (close(fd), ft_putstr_fd("Enjoy!\n", 1), 0);
+	return (close(fd), 0);
 }
 
 void	make_window(t_vars vars, t_val val)
 {
 	gettimeofday(&vars.start, NULL);
+	time(&vars.t0);
 	vars.mlx = mlx_init();
 	if (vars.mlx == NULL)
 	{

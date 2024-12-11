@@ -70,6 +70,7 @@ typedef struct s_img
 typedef struct s_vars
 {
 	struct	timeval start, end;
+	time_t t0, t1;
 	double	elapsed;
 	bool	bonus;
 	void	*mlx;

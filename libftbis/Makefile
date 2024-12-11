@@ -76,19 +76,19 @@ NAME		:=	libft.a
 all			:	$(NAME)
 
 $(NAME)		:	$(OBJS_D) $(OBJS) Makefile
-				$(AR) $(CLFAGS) -o $(NAME) $(OBJS)
+				@$(AR) $(CLFAGS) -o $(NAME) $(OBJS)
 
 $(OBJS)		:	$(OBJS_D)%.o: $(SRCS_D)%.c $(HEAD)
-				$(CC) $(CFLAGS) -I$(HEAD_D) -c $< -o $@
+				@$(CC) $(CFLAGS) -I$(HEAD_D) -c $< -o $@
 
 $(OBJS_D)	:
 				@mkdir -p $(OBJS_D)
 
 clean		:
-				$(RM) -r $(OBJS) $(OBJS_D)
+				@$(RM) -r $(OBJS) $(OBJS_D)
 
 fclean		:	clean
-				$(RM) $(NAME)
+				@$(RM) $(NAME)
 
 re			:	fclean all
 

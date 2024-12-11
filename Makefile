@@ -1,14 +1,4 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: grebrune <grebrune@student.42lyon.fr>      +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/11/07 16:45:45 by grebrune          #+#    #+#              #
-#    Updated: 2024/02/02 15:22:42 by grebrune         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
+
 
 ########################################################################################################################
 #                                                       VARIABLE                                                       #
@@ -44,11 +34,15 @@ HEAD		:=	so_long.h
 
 HEAD_D		:=	.
 
-CFLAGS		:=	-Wall -Wextra -Werror -g3
+CFLAGS		:=	-Wall -Wextra -Werror
 
 NAME		:=	so_long
 
 NAME_B		:=	so_long_bonus
+
+BNS			=	$(shell ./so_long_bonus maps/map_l.ber)
+
+RUN			=	$(shell ./so_long maps/no_fun.ber)
 
 ########################################################################################################################
 #                                                         LIB                                                          #
@@ -86,21 +80,27 @@ PRI_A		:=	$(addprefix $(PRI_D), $(PRI))
 ########################################################################################################################
 
 all			:	lib
-				$(MAKE) $(NAME)
+				$(MAKE) --silent $(NAME)
 
 bonus		:	lib
-				$(MAKE) $(NAME_B)
+				$(MAKE) --silent $(NAME_B)
+
+run			:	all
+				@echo $(RUN)
+
+full		:	bonus
+				@echo $(BNS)
 
 lib			:
-				$(MAKE) -C $(LIB_D)
-				$(MAKE) -C $(MLX_D)
-				$(MAKE) -C $(PRI_D)
+				$(MAKE) --silent -C $(LIB_D)
+				$(MAKE) --silent -C $(PRI_D)
+				$(MAKE) --silent -C $(MLX_D) 2>/dev/null
 
 $(NAME)		:	$(OBJS_D) $(OBJS) $(LIB_A) $(MLX_A) $(PRI_A) $(HEAD)
-				$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(MLX_A) $(LIB_A) $(PRI_A) $(MLX_F)
+				@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(MLX_A) $(LIB_A) $(PRI_A) $(MLX_F)
 
-$(OBJS)		:	$(OBJS_D)%.o: $(SRCS_D)%.c $(HEAD) $(MLX_H) $(LIB_H) $(PRI_H)
-				$(CC) $(CFLAGS) -I/usr/include -Ilibftbis -Imlx_linux -c $< -o $@
+$(OBJS)		:	$(OBJS_D)%.o: $(SRCS_D)%.c $(HEAD) $(MLX_H) $(LIB_H) $(PRI_H) Makefile
+				@$(CC) $(CFLAGS) -I/usr/include -Ilibftbis -Imlx_linux -c $< -o $@
 
 $(OBJS_D)	:
 				@mkdir -p $(OBJS_D)
@@ -113,11 +113,11 @@ $(OBJS_D)	:
 $(NAME_B)	:	 $(OBJS_B_D) $(OBJS_B) $(LIB_A) $(MLX_A) $(PRI_A) $(HEAD)
 				$(CC) $(CFLAGS) -o $(NAME_B) $(OBJS_B) $(MLX_A) $(LIB_A) $(MLX_F) $(PRI_A)
 
-$(OBJS_B)	:	$(OBJS_B_D)%.o: $(SRCS_D)%.c $(HEAD) $(LIB_H) $(MLX_H) $(PRI_H)
+$(OBJS_B)	:	$(OBJS_B_D)%.o: $(SRCS_D)%.c $(HEAD) $(LIB_H) $(MLX_H) $(PRI_H) Makefile
 				$(CC) $(CFLAGS) -I/usr/include -Ilibftbis -Imlx_linux -c $< -o $@
 
 $(OBJS_B_D)	:
-				@mkdir -p $(OBJS_B_D)
+				mkdir -p $(OBJS_B_D)
 
 ########################################################################################################################
 #                                                        COMMANDS                                                      #
@@ -125,16 +125,16 @@ $(OBJS_B_D)	:
 
 clean		:
 				$(RM) -r $(OBJS) $(OBJS_D) $(OBJS_B) $(OBJS_B_D)
-				$(MAKE) clean -C libftbis
-				$(MAKE) clean -C mlx_linux
-				$(MAKE) clean -C ft_printf
+				$(MAKE) --silent clean -C libftbis
+				$(MAKE) --silent clean -C mlx_linux
+				$(MAKE) --silent clean -C ft_printf
 
 fclean		:	clean
 				$(RM) $(NAME) $(NAME_B)
-				$(MAKE) fclean -C libftbis
-				$(MAKE) fclean -C ft_printf
-				$(MAKE) clean -C mlx_linux
+				$(MAKE) --silent fclean -C libftbis
+				$(MAKE) --silent fclean -C ft_printf
 
 re			:	fclean all
 
-.PHONY: all bonus clean fclean re lib
+.PHONY: all bonus clean fclean re lib run full
+.SILENT: all bonus clean fclean re lib

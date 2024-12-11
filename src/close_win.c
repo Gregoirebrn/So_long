@@ -34,7 +34,11 @@ int	key_hook(int keycode, t_vars *vars)
 	if (vars->map[vars->x][vars->y] == vars->map[vars->val->x][vars->val->y] \
 	&& vars->val->c_val == 0)
 	{
-		ft_putstr_fd("You Win!\n", 1);
+		time(&vars->t1);
+		double elapsed = difftime(vars->t1, vars->t0);
+		int min = (int)elapsed / 60;
+		int sec = (int)elapsed % 60;
+		ft_printf("You Win in %d,%d min!\n", min, sec);
 		close_win(vars);
 	}
 	return (0);
