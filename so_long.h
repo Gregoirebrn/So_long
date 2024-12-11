@@ -18,9 +18,9 @@
 # include "mlx_linux/mlx.h"
 # include <stdio.h>
 # include <stdbool.h>
+//time
 #include <time.h>
-#include <SDL2/SDL.h>
-
+#include <sys/time.h>
 
 # define FRAME_RATE 60
 
@@ -69,7 +69,7 @@ typedef struct s_img
 
 typedef struct s_vars
 {
-	struct	timespec start, end;
+	struct	timeval start, end;
 	double	elapsed;
 	bool	bonus;
 	void	*mlx;

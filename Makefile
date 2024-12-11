@@ -44,7 +44,7 @@ HEAD		:=	so_long.h
 
 HEAD_D		:=	.
 
-CFLAGS		:=	-Wall -Wextra -Werror -ofast -g3
+CFLAGS		:=	-Wall -Wextra -Werror -g3
 
 NAME		:=	so_long
 

@@ -46,27 +46,29 @@ void	xpm_to_img(void *mlx, t_vars *vars)
 
 void	find_img(t_vars *vars, t_img img, char c)
 {
-	static int count_ani = 0;
-	static int skull_ani = 1;
+	gettimeofday(&vars->end, NULL);
+	float time = (vars->end.tv_sec - vars->start.tv_sec) * 1000.0f + (vars->end.tv_usec - vars->start.tv_usec) / 1000.0f;
 
+	if (time > 1050)
+		gettimeofday(&vars->start, NULL);
 	if (c == 'P')
 	{
-		if (count_ani == 0)
+		if (time <= 300)
 			mlx_put_image_to_window(vars->mlx, vars->win, img.player_0, img.i, img.x);
-		else if (count_ani == 1)
+		else if (time <= 600)
 			mlx_put_image_to_window(vars->mlx, vars->win, img.player_1, img.i, img.x);
-		else if (count_ani == 2)
+		else if (time <= 900)
 			mlx_put_image_to_window(vars->mlx, vars->win, img.player_2, img.i, img.x);
 		else
 			mlx_put_image_to_window(vars->mlx, vars->win, img.player_1, img.i, img.x);
 	}
 	if (c == 'M')
 	{
-		if (count_ani == 0)
+		if (time <= 300)
 			mlx_put_image_to_window(vars->mlx, vars->win, img.monster_1, img.i, img.x);
-		else if (count_ani == 1)
+		else if (time <= 600)
 			mlx_put_image_to_window(vars->mlx, vars->win, img.monster_2, img.i, img.x);
-		else if (count_ani == 2)
+		else if (time <= 900)
 			mlx_put_image_to_window(vars->mlx, vars->win, img.monster_3, img.i, img.x);
 		else
 			mlx_put_image_to_window(vars->mlx, vars->win, img.monster_2, img.i, img.x);
@@ -80,19 +82,19 @@ void	find_img(t_vars *vars, t_img img, char c)
 		mlx_put_image_to_window(vars->mlx, vars->win, img.wall, img.i, img.x);
 	if (c == 'C')
 	{
-		if (skull_ani == 1)
+		if (time <= 150)
 			mlx_put_image_to_window(vars->mlx, vars->win, img.skull_0, img.i, img.x);
-		else if (skull_ani == 2)
+		else if (time <= 300)
 			mlx_put_image_to_window(vars->mlx, vars->win, img.skull_1, img.i, img.x);
-		else if (skull_ani == 3)
+		else if (time <= 450)
 			mlx_put_image_to_window(vars->mlx, vars->win, img.skull_2, img.i, img.x);
-		else if (skull_ani == 4)
+		else if (time <= 600)
 			mlx_put_image_to_window(vars->mlx, vars->win, img.skull_3, img.i, img.x);
-		else if (skull_ani == 5)
+		else if (time <= 750)
 			mlx_put_image_to_window(vars->mlx, vars->win, img.skull_4, img.i, img.x);
-		else if (skull_ani == 6)
+		else if (time <= 900)
 			mlx_put_image_to_window(vars->mlx, vars->win, img.skull_5, img.i, img.x);
-		else if (skull_ani == 7)
+		else if (time <= 1050)
 			mlx_put_image_to_window(vars->mlx, vars->win, img.skull_6, img.i, img.x);
 		else
 			mlx_put_image_to_window(vars->mlx, vars->win, img.skull_7, img.i, img.x);
@@ -101,12 +103,6 @@ void	find_img(t_vars *vars, t_img img, char c)
 		mlx_put_image_to_window(vars->mlx, vars->win, img.door, img.i, img.x);
 	if (c == 'F')
 		mlx_put_image_to_window(vars->mlx, vars->win, img.exit, img.i, img.x);
-	count_ani++;
-	if (count_ani > 2)
-		count_ani = 0;
-	skull_ani++;
-	if (skull_ani >= 7)
-		skull_ani = 1;
 }
 
 void	put_sprite_utils(t_vars *vars)
@@ -135,8 +131,6 @@ int	put_sprite(t_vars *vars)
 {
 	char	*str;
 
-//	usleep(170000);
-	clock_gettime(CLOCK_MONOTONIC, &vars->start);
 	xpm_to_img(vars->mlx, vars);
 	vars->img.x = 0;
 	vars->img.i = 120;
@@ -152,12 +146,6 @@ int	put_sprite(t_vars *vars)
 	mlx_string_put(vars->mlx, vars->win, 80, 15, 0xffff00, str);
 	free(str);
 	close_img(vars);
-	clock_gettime(CLOCK_MONOTONIC, &vars->end);
-	vars->elapsed = (vars->end.tv_sec - vars->start.tv_sec) + (vars->end.tv_nsec - vars->start.tv_nsec) / 1e9;
-
-//	double frame_duration = 1.0 / FRAME_RATE;
-//	if (vars->elapsed < frame_duration)
-//		sleep(1);
 	return (1);
 }
 

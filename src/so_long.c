@@ -41,10 +41,7 @@ int	map_maker(t_vars *vars, t_val *val, char *file)
 
 void	make_window(t_vars vars, t_val val)
 {
-//	SDL_Init(SDL_INIT_VIDEO);
-//
-//	Uint32 frame_delay = 1000 / FRAME_RATE;
-//	Uint32 frame_start, frame_time;
+	gettimeofday(&vars.start, NULL);
 	vars.mlx = mlx_init();
 	if (vars.mlx == NULL)
 	{
