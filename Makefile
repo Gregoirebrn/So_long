@@ -1,5 +1,3 @@
-
-
 ########################################################################################################################
 #                                                       VARIABLE                                                       #
 ########################################################################################################################
@@ -11,6 +9,8 @@ SRCS		:=	so_long.c\
 				close_win.c\
 				game_move.c\
 				tab_creator.c\
+				xtoi.c\
+				animation.c\
 
 SRCS_B		:=	so_long.c\
 				parsing_bonus.c\
@@ -19,6 +19,8 @@ SRCS_B		:=	so_long.c\
 				close_win.c\
 				game_move.c\
 				tab_creator.c\
+				xtoi.c\
+				animation.c\
 
 SRCS_D		:=	src/
 

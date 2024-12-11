@@ -12,17 +12,17 @@
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
+//standard
 # include <unistd.h>
+# include <stdio.h>
+# include <stdbool.h>
+//own libs
 # include "libftbis/libft.h"
 # include "ft_printf/ft_printf.h"
 # include "mlx_linux/mlx.h"
-# include <stdio.h>
-# include <stdbool.h>
 //time
-#include <time.h>
-#include <sys/time.h>
-
-# define FRAME_RATE 60
+# include <time.h>
+# include <sys/time.h>
 
 typedef struct s_anime
 {
@@ -69,19 +69,21 @@ typedef struct s_img
 
 typedef struct s_vars
 {
-	struct	timeval start, end;
-	time_t t0, t1;
-	double	elapsed;
-	bool	bonus;
-	void	*mlx;
-	void	*win;
-	char	**map;
-	size_t	x;
-	size_t	y;
-	int		move;
-	t_val	*val;
-	t_img	img;
-	t_anime	ani;
+	struct timeval	start;
+	struct timeval	end;
+	time_t			t0;
+	time_t			t1;
+	double			elapsed;
+	bool			bonus;
+	void			*mlx;
+	void			*win;
+	char			**map;
+	size_t			x;
+	size_t			y;
+	int				move;
+	t_val			*val;
+	t_img			img;
+	t_anime			ani;
 }	t_vars;
 
 int		check_border(char **tab);
@@ -104,13 +106,14 @@ void	set_to_zero(t_val *val);
 
 int		put_sprite(t_vars *vars);
 void	end_game(t_vars vars, t_val val);
-void	xpm_to_img(void *mlx, t_vars *vars);
-void	find_img(t_vars *vars, t_img img, char c);
 
 int		key_hook(int keycode, t_vars *vars);
 void	player_move(int keycode, t_vars *vars);
 void	map_move(t_vars *vars, int y, int x);
 
-void	put_sprite_utils(t_vars *vars);
+// make the next image
+void	finder(t_vars *vars);
+void	xpm_to_img(void *mlx, t_vars *vars);
+void	find_img(t_vars *vars, t_img img, char c);
 
 #endif

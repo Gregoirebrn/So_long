@@ -37,3 +37,10 @@ char	**tab_dup(char **tab)
 	tmp[x] = NULL;
 	return (tmp);
 }
+
+void	set_to_zero(t_val *val)
+{
+	val->p_val = 0;
+	val->e_val = 0;
+	val->c_val = 0;
+}

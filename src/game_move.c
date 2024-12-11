@@ -15,10 +15,7 @@
 void	map_move(t_vars *vars, int y, int x)
 {
 	if (vars->map[vars->x + x][vars->y + y] == 'M')
-	{
-		ft_putstr_fd("You Died!\n", 1);
-		close_win(vars);
-	}
+		return (write(1, "You Died :/\n", 12), close_win(vars), (void)0);
 	if (vars->map[vars->x + x][vars->y + y] == 'C')
 		vars->val->c_val--;
 	if (vars->val->c_val == 0)
@@ -27,10 +24,7 @@ void	map_move(t_vars *vars, int y, int x)
 	{
 		vars->move += 1;
 		if (!vars->bonus)
-		{
-			ft_putnbr_fd((int)vars->move, 1);
-			ft_putstr_fd(" moves.\n", 1);
-		}
+			ft_printf("%d moves\n", (int)vars->move);
 		vars->map[vars->x][vars->y] = '0';
 		if (vars->map[vars->x][vars->y] == vars->map[vars->val->x] \
 		[vars->val->y] && vars->val->c_val == 0)

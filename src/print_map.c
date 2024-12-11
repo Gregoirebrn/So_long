@@ -12,100 +12,7 @@
 
 #include "../so_long.h"
 
-void	xpm_to_img(void *mlx, t_vars *vars)
-{
-	int		width;
-	int		height;
-	vars->img.skull_0 = mlx_xpm_file_to_image(mlx, "img/skull/skull_0.xpm", &width, &height);
-	vars->img.skull_1 = mlx_xpm_file_to_image(mlx, "img/skull/skull_1.xpm", &width, &height);
-	vars->img.skull_2 = mlx_xpm_file_to_image(mlx, "img/skull/skull_2.xpm", &width, &height);
-	vars->img.skull_3 = mlx_xpm_file_to_image(mlx, "img/skull/skull_3.xpm", &width, &height);
-	vars->img.skull_4 = mlx_xpm_file_to_image(mlx, "img/skull/skull_4.xpm", &width, &height);
-	vars->img.skull_5 = mlx_xpm_file_to_image(mlx, "img/skull/skull_5.xpm", &width, &height);
-	vars->img.skull_6 = mlx_xpm_file_to_image(mlx, "img/skull/skull_6.xpm", &width, &height);
-	vars->img.skull_7 = mlx_xpm_file_to_image(mlx, "img/skull/skull_7.xpm", &width, &height);
-
-	vars->img.empty = mlx_xpm_file_to_image(mlx, "img/empty.xpm", &width, &height);
-	vars->img.monster_1 = mlx_xpm_file_to_image(mlx, "img/opps_1.xpm", &width, &height);
-	vars->img.monster_2 = mlx_xpm_file_to_image(mlx, "img/opps_2.xpm", &width, &height);
-	vars->img.monster_3 = mlx_xpm_file_to_image(mlx, "img/opps_3.xpm", &width, &height);
-	vars->img.wall = mlx_xpm_file_to_image(mlx, "img/wall.xpm", &width, &height);
-	vars->img.player_0 = mlx_xpm_file_to_image(mlx, "img/frame_0.xpm", &width, &height);
-	vars->img.player_1 = mlx_xpm_file_to_image(mlx, "img/frame_1.xpm", &width, &height);
-	vars->img.player_2 = mlx_xpm_file_to_image(mlx, "img/frame_2.xpm", &width, &height);
-	vars->img.door = mlx_xpm_file_to_image(mlx, "img/door.xpm", &width, &height);
-	vars->img.score = mlx_xpm_file_to_image(mlx, "img/score.xpm", &width, &height);
-	vars->img.exit = mlx_xpm_file_to_image(mlx, "img/exit.xpm", &width, &height);
-	if (!vars->img.empty || !vars->img.monster_1 || !vars->img.monster_2 || !vars->img.monster_3 \
-		|| !vars->img.wall || !vars->img.skull_0 || !vars->img.skull_1 || !vars->img.skull_2 \
-		|| !vars->img.skull_3 || !vars->img.skull_4 || !vars->img.skull_5 || !vars->img.skull_6 \
-		|| !vars->img.skull_7 || !vars->img.player_0 || !vars->img.player_1 \
-		|| !vars->img.player_2 || !vars->img.door || !vars->img.score || !vars->img.exit)
-		close_win(vars);
-}
-
-void	find_img(t_vars *vars, t_img img, char c)
-{
-	gettimeofday(&vars->end, NULL);
-	float time = (vars->end.tv_sec - vars->start.tv_sec) * 1000.0f + (vars->end.tv_usec - vars->start.tv_usec) / 1000.0f;
-
-	if (time > 1050)
-		gettimeofday(&vars->start, NULL);
-	if (c == 'P')
-	{
-		if (time <= 300)
-			mlx_put_image_to_window(vars->mlx, vars->win, img.player_0, img.i, img.x);
-		else if (time <= 600)
-			mlx_put_image_to_window(vars->mlx, vars->win, img.player_1, img.i, img.x);
-		else if (time <= 900)
-			mlx_put_image_to_window(vars->mlx, vars->win, img.player_2, img.i, img.x);
-		else
-			mlx_put_image_to_window(vars->mlx, vars->win, img.player_1, img.i, img.x);
-	}
-	if (c == 'M')
-	{
-		if (time <= 300)
-			mlx_put_image_to_window(vars->mlx, vars->win, img.monster_1, img.i, img.x);
-		else if (time <= 600)
-			mlx_put_image_to_window(vars->mlx, vars->win, img.monster_2, img.i, img.x);
-		else if (time <= 900)
-			mlx_put_image_to_window(vars->mlx, vars->win, img.monster_3, img.i, img.x);
-		else
-			mlx_put_image_to_window(vars->mlx, vars->win, img.monster_2, img.i, img.x);
-	}
-
-	if (c == 'S')
-		mlx_put_image_to_window(vars->mlx, vars->win, img.score, 0, 0);
-	if (c == '0')
-		mlx_put_image_to_window(vars->mlx, vars->win, img.empty, img.i, img.x);
-	if (c == '1')
-		mlx_put_image_to_window(vars->mlx, vars->win, img.wall, img.i, img.x);
-	if (c == 'C')
-	{
-		if (time <= 150)
-			mlx_put_image_to_window(vars->mlx, vars->win, img.skull_0, img.i, img.x);
-		else if (time <= 300)
-			mlx_put_image_to_window(vars->mlx, vars->win, img.skull_1, img.i, img.x);
-		else if (time <= 450)
-			mlx_put_image_to_window(vars->mlx, vars->win, img.skull_2, img.i, img.x);
-		else if (time <= 600)
-			mlx_put_image_to_window(vars->mlx, vars->win, img.skull_3, img.i, img.x);
-		else if (time <= 750)
-			mlx_put_image_to_window(vars->mlx, vars->win, img.skull_4, img.i, img.x);
-		else if (time <= 900)
-			mlx_put_image_to_window(vars->mlx, vars->win, img.skull_5, img.i, img.x);
-		else if (time <= 1050)
-			mlx_put_image_to_window(vars->mlx, vars->win, img.skull_6, img.i, img.x);
-		else
-			mlx_put_image_to_window(vars->mlx, vars->win, img.skull_7, img.i, img.x);
-	}
-	if (c == 'E')
-		mlx_put_image_to_window(vars->mlx, vars->win, img.door, img.i, img.x);
-	if (c == 'F')
-		mlx_put_image_to_window(vars->mlx, vars->win, img.exit, img.i, img.x);
-}
-
-void	put_sprite_utils(t_vars *vars)
+void	finder(t_vars *vars)
 {
 	int		i;
 	int		x;
@@ -134,7 +41,7 @@ int	put_sprite(t_vars *vars)
 	xpm_to_img(vars->mlx, vars);
 	vars->img.x = 0;
 	vars->img.i = 120;
-	put_sprite_utils(vars);
+	finder(vars);
 	find_img(vars, vars->img, 'S');
 	mlx_string_put(vars->mlx, vars->win, 40, 15, 0xffff00, "MOVES ");
 	str = ft_itoa(vars->move);
@@ -148,12 +55,3 @@ int	put_sprite(t_vars *vars)
 	close_img(vars);
 	return (1);
 }
-
-//clock_gettime(CLOCK_MONOTONIC, &vars.start);
-//
-//clock_gettime(CLOCK_MONOTONIC, &vars.end);
-//vars.elapsed = (vars.end.tv_sec - vars.start.tv_sec) + (vars.end.tv_nsec - vars.start.tv_nsec) / 1e9;
-//
-//double frame_duration = 1.0 / FRAME_RATE;
-//if (vars.elapsed < frame_duration)
-//sleep(1);
