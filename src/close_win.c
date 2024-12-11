@@ -70,6 +70,7 @@ void	destroy_skull(t_vars *vars)
 
 void	close_img(t_vars *vars)
 {
+	destroy_skull(vars);
 	if (vars->img.door)
 		mlx_destroy_image(vars->mlx, vars->img.door);
 	if (vars->img.monster_1)
@@ -98,6 +99,8 @@ int	close_win(t_vars *vars)
 {
 	ft_printf("Total moves in game : %d\n", (int)vars->move);
 	ft_free(vars->map);
+	close_img(vars);
+	destroy_skull(vars);
 	mlx_destroy_window(vars->mlx, vars->win);
 	mlx_destroy_display(vars->mlx);
 	free(vars->mlx);

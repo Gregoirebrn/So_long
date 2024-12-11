@@ -96,7 +96,7 @@ int	check_path(char **tab, t_vars *vars)
 		{
 			if (tab[x][y] != '0' && tab[x][y] != '1' && \
 			tab[x][y] != 'C' && tab[x][y] != 'E' && tab[x][y] != 'P')
-				return (ft_putstr_fd("Error\nWrong item in the map.\n", 1), 1);
+				return (ft_putstr_fd("Error\nWrong item in the map.\n", 1), ft_free(tmp), 1);
 			find_place(tmp, vars, y, x);
 			y++;
 		}

@@ -16,7 +16,7 @@
 # include <stdarg.h>
 # include <unistd.h>
 
-int	ft_printf(const char *str, ...);
+int		ft_printf(const char *str, ...);
 ssize_t	ft_find_type(const char c, va_list lst);
 ssize_t	ft_putnbr_b(ssize_t i, char *base, ssize_t *parse);
 ssize_t	ft_putnbr_addr(size_t i, char *base, ssize_t *parse);

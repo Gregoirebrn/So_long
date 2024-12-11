@@ -34,7 +34,7 @@ int	map_maker(t_vars *vars, t_val *val, char *file)
 	vars->map = ft_split(line, '\n');
 	if (check_border(vars->map) || check_val(vars->map, val) || \
 	check_path(vars->map, vars))
-		return (1);
+		return (ft_free(vars->map), 1);
 	vars->val = val;
 	return (close(fd), 0);
 }
@@ -45,11 +45,7 @@ void	make_window(t_vars vars, t_val val)
 	time(&vars.t0);
 	vars.mlx = mlx_init();
 	if (vars.mlx == NULL)
-	{
-		ft_putstr_fd("Error\nThe mlx has crash.", 1);
-		ft_free(vars.map);
-		return ;
-	}
+		return (write(1, "Error\nThe mlx has crash.", 25), ft_free(vars.map), (void)0);
 	vars.win = mlx_new_window(vars.mlx, 60 * val.wy, 60 * val.wx, "So_long");
 	mlx_hook(vars.win, 2, 1L << 0, key_hook, &vars);
 	mlx_hook(vars.win, 17, 1L << 0, close_win, &vars);

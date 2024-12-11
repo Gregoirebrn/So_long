@@ -24,12 +24,6 @@
 # include <time.h>
 # include <sys/time.h>
 
-typedef struct s_anime
-{
-	void	*frame_1;
-	void	*frame_2;
-}	t_anime;
-
 typedef struct s_val
 {
 	size_t	p_val;
@@ -83,7 +77,6 @@ typedef struct s_vars
 	int				move;
 	t_val			*val;
 	t_img			img;
-	t_anime			ani;
 }	t_vars;
 
 int		check_border(char **tab);
