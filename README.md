@@ -1,4 +1,4 @@
-# so_long
+# So_long
 
 
 [Screencast from 02-07-2025 12:17:38 PM.webm](https://github.com/user-attachments/assets/29bdd461-5b41-40ac-8c08-94bad4809966)
@@ -14,22 +14,19 @@ so_long est un projet de l'école 42 qui consiste à créer un petit jeu en 2D u
 - Condition de victoire et défaite
 - Gestion des touches pour quitter le jeu
 
-## 🛠️ Installation
-
-Clonez le dépôt et compilez le projet :
-
-```bash
-git clone https://github.com/votre-utilisateur/so_long.git
-cd so_long
-make
-```
-
 ## 🎮 Utilisation
 
-Lancer le jeu avec une carte :
+Pour lancer et compiler le projet :
 
 ```bash
-./so_long maps/map1.ber
+make run // Compil et lance avec bonus
+make // Compil
+```
+
+Lancer le jeu avec une carte differente :
+
+```bash
+./so_long <nom>.ber
 ```
 
 ## 📜 Format de la carte
@@ -59,14 +56,6 @@ Exemple de carte valide :
 | D / →  | Aller à droite |
 | ESC    | Quitter le jeu |
 
-## 📚 Dépendances
-
-Le projet utilise **MiniLibX**, assurez-vous qu'elle est installée :
-
-```bash
-sudo apt-get install libxext-dev libx11-dev libbsd-dev
-```
-
 ## 🛠️ Compilation et nettoyage
 
 - Compiler : `make`
@@ -80,11 +69,7 @@ sudo apt-get install libxext-dev libx11-dev libbsd-dev
 - Gestion des entrées utilisateur
 - Lecture et validation de fichiers
 - Optimisation des performances en C
-
-## 📜 Licence
-
-Projet réalisé dans le cadre de l'école **42**.
-
+  
 ---
 
 ✨ Bon jeu ! 🎮
